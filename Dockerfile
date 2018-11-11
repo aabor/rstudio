@@ -1,4 +1,5 @@
 # aabor/rstudio
+# configured for automatic build
 FROM rocker/tidyverse:3.5.0
 # installation utilities
 RUN  apt-get update && apt-get -y install wget zip unzip make
