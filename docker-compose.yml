@@ -1,0 +1,24 @@
+version: '2'
+services:
+  selenium:
+    image: selenium/standalone-firefox:3.14.0
+    ports:
+      - "4445:4444"
+    volumes:
+      - C:/Users/aabor/Documents/R/Downloads:/home/seluser/Downloads
+    container_name: selenium
+  rstudio: 
+    image: aabor/rstudio
+    volumes:
+      - C:/Users/aabor/Documents/R:/home/rstudio  
+      - C:/Users/aabor/Documents/R:/srv/shiny-server 
+      - C:/Users/aabor/Documents/R/.log:/var/log/shiny-server
+    ports:
+      - "8787:8787"
+      - "3838:3838"
+    environment:
+      - USER=rstudio
+      - PASSWORD=~J}CRU?95ksl
+    links:
+      - selenium:selenium
+    container_name: rstudio
