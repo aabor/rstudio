@@ -1,24 +1,39 @@
 version: '2'
 services:
   selenium:
-    image: selenium/standalone-firefox:3.14.0
+    image: selenium/standalone-firefox:3.141.59-bismuth
     ports:
-      - "4445:4444"
+      - "4444:4444"
     volumes:
-      - C:/Users/aabor/Documents/R/Downloads:/home/seluser/Downloads
+      - /dev/shm:/dev/shm
+      - /home/$USER/r-projects/downloads:/home/seluser/Downloads
     container_name: selenium
+    networks: 
+      - backend
+    restart: always
   rstudio: 
     image: aabor/rstudio
+    build: .
     volumes:
-      - C:/Users/aabor/Documents/R:/home/rstudio  
-      - C:/Users/aabor/Documents/R:/srv/shiny-server 
-      - C:/Users/aabor/Documents/R/.log:/var/log/shiny-server
+      # executable scripts
+      - /home/$USER/r-projects/rstudio:/home/rstudio
+      # SSH keys
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      # shiny server
+      - /home/$USER/r-projects/rstudio:/srv/shiny-server 
+      - /home/$USER/r-projects/rstudio/.log:/var/log/shiny-server
     ports:
       - "8787:8787"
       - "3838:3838"
     environment:
       - USER=rstudio
-      - PASSWORD=~J}CRU?95ksl
-    links:
-      - selenium:selenium
+      - PASSWORD=123
     container_name: rstudio
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+networks: 
+  backend:
+    driver: bridge

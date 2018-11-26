@@ -2,16 +2,29 @@
 # configured for automatic build
 FROM rocker/tidyverse:3.5.0
 # installation utilities
-RUN  apt-get update && apt-get -y install wget zip unzip make
+RUN  apt-get update && apt-get -y install \
+  wget zip unzip make \
+  && apt-get clean
+# ssh 
+RUN  apt-get update && apt-get -y install \
+  openssh-server \
+  xclip \
+  && apt-get clean
+
 ## gnupg is needed to add new key 
-RUN apt-get update && apt-get install -y gnupg2
+RUN apt-get update && apt-get install -y \
+  gnupg2 \
+  && apt-get clean
+
 ## install Fonts
 RUN apt-get update && apt-get install -y libfreetype6-dev \
   libgtk2.0-dev \
   libxt-dev \
-  libcairo2-dev
+  libcairo2-dev \
+  && apt-get clean
+# 'TrueType', 'OpenType', Type 1, web fonts, etc.
+# in R graphs
 RUN install2.r --error \
-  # 'TrueType', 'OpenType', Type 1, web fonts, etc. in R graphs
   showtext \
   && apt-get clean
 
@@ -220,6 +233,5 @@ RUN sudo installGithub.r \
 # RUN install2.r --error \
 #   RSelenium \
 #   && rm -rf /tmp/downloaded_packages/
-
 
 
