@@ -1,12 +1,26 @@
 version: '2'
 services:
+  dropbox:
+    image: janeczku/dropbox
+    # ports:
+    #   - "17500:17500"
+    volumes:
+      - /home/$USER/r-projects/rstudio/Dropbox-docker:/dbox/Dropbox
+      - /home/$USER/r-projects/rstudio/.dropbox:/dbox/.dropbox-docker
+    environment:
+      - DBOX_UID=$DBOX_UID
+      - DBOX_GID=$DBOX_GID
+    restart: always
+    networks: 
+      - backend
+    container_name: dropbox
   selenium:
     image: selenium/standalone-firefox:3.141.59-bismuth
     ports:
       - "4444:4444"
     volumes:
       - /dev/shm:/dev/shm
-      - /home/$USER/r-projects/downloads:/home/seluser/Downloads
+      - /home/$USER/r-projects/rstudio/downloads:/home/seluser/Downloads
     container_name: selenium
     networks: 
       - backend
@@ -17,6 +31,9 @@ services:
     volumes:
       # executable scripts
       - /home/$USER/r-projects/rstudio:/home/rstudio
+      - /home/$USER/Documents/textbooks:/home/rstudio/textbooks
+      # folder with quotes updated by MetaTrader
+      - /home/$USER/Dropbox/mt4quotes/Data:/home/rstudio/mt4quotes
       # SSH keys
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       # shiny server
