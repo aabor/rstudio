@@ -151,13 +151,6 @@ RUN apt-get update && apt-get install -y \
 # Add shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 
-# additional tidyverse packages
-RUN install2.r --error \ 
-  #Build Regular Expressions in a Human Readable Way.
-  rebus 
-
-#################################################################
-
 # connection to other applications: Excel, Acrobat, ...
 RUN install2.r --error \ 
   # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text, fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG, JPEG, TIFF format, or into raw bitmap vectors
