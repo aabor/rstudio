@@ -230,4 +230,6 @@ RUN sudo installGithub.r \
 #   RSelenium \
 #   && rm -rf /tmp/downloaded_packages/
 
-
+RUN install2.r --error \
+  gmp \
+  && rm -rf /tmp/downloaded_packages/
