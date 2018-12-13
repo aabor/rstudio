@@ -6,7 +6,7 @@ LABEL maintainer="A. Borochkin"
 
 # installation utilities
 RUN  apt-get update && apt-get install -y \
-  wget zip unzip make \
+  wget zip unzip make cron\
   && apt-get clean
 # ssh 
 RUN  apt-get update && apt-get install -y \
@@ -33,10 +33,19 @@ RUN install2.r --error \
 
 ## Install R packages for C++
 RUN install2.r --error \
+  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
+  fs \
+  #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
+  xfun \
+  # Provides a simple interface for creating active bindings where the bound function accepts additional arguments
+  bindr \
   inline \
   rbenchmark \
+  RcppArmadillo \
   RUnit \
   highlight \
+  # General Network (HTTP/FTP/...) Client Interface for R
+  RCurl \
   && apt-get clean
 # For developers
 RUN install2.r --error \
@@ -147,6 +156,42 @@ RUN apt-get update && apt-get install -y \
     gsl-bin \
     libgsl0-dev \
     librdf0-dev
+RUN install2.r --error \ 
+    #Run 'R CMD check' from 'R' programmatically, and capture the results of the individual checks
+    rcmdcheck \
+    #R string manipulation functions that account for the effects of ANSI text formatting control sequences
+    fansi \
+    #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier
+    e1071 \
+    # Gaussian Mixture Modelling for Model-Based Clustering, Classification, and Density Estimation
+    mclust \
+    # Companion to Applied Regression
+    car \
+    # A range of axis labeling algorithms
+    labeling \
+    # Forecasting Functions for Time Series and Linear Models
+    forecast \
+    # Linear Mixed-Effects Models using 'Eigen' and S4
+    lme4 \
+    # Classification and Regression Training
+    caret \
+    # Breiman and Cutler's Random Forests for Classification and Regression
+    randomForest \
+    # Solve optimization problems using an R interface to NLopt. NLopt is a free/open-source library for nonlinear optimization.
+    nloptr \
+    # A collection of dimensionality reduction techniques from R packages and a common interface for calling the methods
+    dimRed \
+    #  A collection of tests, data sets, and examples for diagnostic checking in linear regression models. 
+    lmtest \
+    # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.
+    survival \
+    # Based Publication Ready Plots
+    ggpubr \
+    # Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points
+    ggrepel \
+    # Network Analysis and Visualization
+    igraph \
+    && rm -rf /tmp/downloaded_packages/
 
 # Add shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
@@ -157,6 +202,10 @@ RUN install2.r --error \
   pdftools \
   # R connection to Excel, Java dependent
   XLConnect \
+  # read/write/format Excel 2007 and Excel 97/2000/XP/2003 file formats
+  xlsx \
+  # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with the added benefit of removing the dependency on Java.
+  openxlsx \
   && rm -rf /tmp/downloaded_packages/
 
 # web scrapping
@@ -202,6 +251,8 @@ RUN install2.r --error \
   # Plotly's R graphing library makes interactive, publication-quality graphs online. 
   # line plots, scatter plots, area charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, and 3D (WebGL based) charts
   plotly \
+  # A graphical display of a correlation matrix or general matrix. It also contains some algorithms to do matrix reordering. In addition, corrplot is good at details, including choosing color, text labels, color labels, layout, etc.
+  corrplot \
   && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
