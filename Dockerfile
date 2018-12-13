@@ -6,7 +6,8 @@ LABEL maintainer="A. Borochkin"
 
 # installation utilities
 RUN  apt-get update && apt-get install -y \
-  wget zip unzip make cron\
+  wget zip unzip make cron nano vim \
+  build-essential \
   && apt-get clean
 # ssh 
 RUN  apt-get update && apt-get install -y \
@@ -29,31 +30,80 @@ RUN apt-get update && apt-get install -y libfreetype6-dev \
 # in R graphs
 RUN install2.r --error \
   showtext \
-  && apt-get clean
+  #R string manipulation functions that account for the effects of ANSI text formatting control sequences
+  fansi \
+  && rm -rf /tmp/downloaded_packages/
+
+#Additional ggplot packages
+RUN install2.r --error \
+    # Based Publication Ready Plots
+    ggpubr \
+    # Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points
+    ggrepel \
+    # Network Analysis and Visualization
+    igraph \
+    && rm -rf /tmp/downloaded_packages/
+
+# install poppler, some dependencies of other R packages
+RUN apt-get update && apt-get install -y \
+    ## poppler to install pdftools to work with .pdf files
+    libpoppler-cpp-dev \
+    ## system dependency of hunspell (devtools)
+    libhunspell-dev \
+    ## system dependency of hadley/pkgdown
+    libmagick++-dev \
+    ## (GSL math library dependencies)
+    # for topicmodels on which depends textmineR
+    gsl-bin \
+    libgsl0-dev \
+    librdf0-dev \
+    && apt-get clean
+
+# Dependencies for Rmpfr, gmp
+RUN apt-get update && apt-get install -y \
+    libgmp-dev \
+    libmpfr-dev \
+    && apt-get clean
+
+RUN install2.r --error \ 
+  # Multiple Precision Arithmetic (big integers and rationals, prime number tests, matrix computation), "arithmetic without limitations" using the C library GMP (GNU Multiple Precision Arithmetic)
+  gmp \
+  # Multiple Precision Floating-Point Reliable
+  Rmpfr \
+  # PMCMRplus: Calculate Pairwise Multiple Comparisons of Mean Rank Sums Extended
+  PMCMRplus \
+  && rm -rf /tmp/downloaded_packages/
+
 
 ## Install R packages for C++
 RUN install2.r --error \
-  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
-  fs \
-  #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
-  xfun \
-  # Provides a simple interface for creating active bindings where the bound function accepts additional arguments
+  #Run 'R CMD check' from 'R' programmatically, and capture the results of the individual checks
+  rcmdcheck \
   bindr \
   inline \
   rbenchmark \
   RcppArmadillo \
   RUnit \
   highlight \
-  # General Network (HTTP/FTP/...) Client Interface for R
-  RCurl \
-  && apt-get clean
+  && rm -rf /tmp/downloaded_packages/
+
 # For developers
 RUN install2.r --error \
   # to install from github
   devtools \
   # R testing environment
   testthis \
-  && apt-get clean
+  && rm -rf /tmp/downloaded_packages/
+
+# System utilities
+RUN install2.r --error \
+  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
+  fs \
+  #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
+  xfun \
+  # General Network (HTTP/FTP/...) Client Interface for R
+  RCurl \
+  && rm -rf /tmp/downloaded_packages/
 
 # Setup JAVA_HOME
 ENV JAVA_HOME="/usr/lib/jvm/default-jvm"
@@ -138,29 +188,14 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \ 
     libbz2-dev \
     liblzma-dev \
-    libpcre3-dev 
+    libpcre3-dev \
+    && apt-get clean
+
 # install rJava package
 RUN install2.r --error rJava \ 
 && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-# install poppler, some dependencies of other R packages
-RUN apt-get update && apt-get install -y \
-    ## poppler to install pdftools to work with .pdf files
-    libpoppler-cpp-dev \
-    ## system dependency of hunspell (devtools)
-    libhunspell-dev \
-    ## system dependency of hadley/pkgdown
-    libmagick++-dev \
-    ## (GSL math library dependencies)
-    # for topicmodels on which depends textmineR
-    gsl-bin \
-    libgsl0-dev \
-    librdf0-dev
 RUN install2.r --error \ 
-    #Run 'R CMD check' from 'R' programmatically, and capture the results of the individual checks
-    rcmdcheck \
-    #R string manipulation functions that account for the effects of ANSI text formatting control sequences
-    fansi \
     #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier
     e1071 \
     # Gaussian Mixture Modelling for Model-Based Clustering, Classification, and Density Estimation
@@ -185,12 +220,6 @@ RUN install2.r --error \
     lmtest \
     # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
-    # Based Publication Ready Plots
-    ggpubr \
-    # Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points
-    ggrepel \
-    # Network Analysis and Visualization
-    igraph \
     && rm -rf /tmp/downloaded_packages/
 
 # Add shiny server
@@ -281,6 +310,3 @@ RUN sudo installGithub.r \
 #   RSelenium \
 #   && rm -rf /tmp/downloaded_packages/
 
-RUN install2.r --error \
-  gmp \
-  && rm -rf /tmp/downloaded_packages/
