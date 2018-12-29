@@ -22,8 +22,6 @@ pipeline {
                 sh /* CORRECT */ '''
                     docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans
                 '''
-            }
-            steps {
                 mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text started',
                         from: 'aaborochkin@gmail.com',
                         subject: 'rocker successfully rolled out',
