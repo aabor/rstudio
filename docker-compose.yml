@@ -31,7 +31,7 @@ services:
       - "3838:3838"
     environment:
       - USER=rstudio
-      - PASSWORD=123
+      - PASSWORD=$RSTUDIO_PASSWORD
     networks: 
       - backend
     restart: always
@@ -61,7 +61,7 @@ services:
       - "3839:3838"
     environment:
       - USER=rstudio
-      - PASSWORD=123
+      - PASSWORD=$RSTUDIO_PASSWORD
     links:
       - selenium:selenium
     networks: 
@@ -89,7 +89,7 @@ services:
       - "3840:3838"
     environment:
       - USER=rstudio
-      - PASSWORD=123
+      - PASSWORD=$RSTUDIO_PASSWORD
     networks: 
       - backend
     restart: always
