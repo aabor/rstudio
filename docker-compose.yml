@@ -89,7 +89,7 @@ services:
       - "3840:3838"
     environment:
       - USER=rstudio
-      - PASSWORD=$RSTUDIO_PASSWORD
+      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     networks: 
       - backend
     restart: always
