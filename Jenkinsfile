@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 """${sh(
-                    docker-compose up -d --remove-orphans
+                    docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans
                 )}"""
             }
             steps {
