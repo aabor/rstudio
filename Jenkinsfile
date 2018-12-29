@@ -19,9 +19,9 @@ pipeline {
             }            
             steps {
                 echo 'Deploying....'
-                docker.withTool('docker') {
-                        sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans'
-                }
+                sh /* CORRECT */ '''
+                    docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans
+                '''
             }
             steps {
                 mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text started',
