@@ -2,6 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Build') {
+            environment { 
+                USER=credentials('jenkins-current-user')
+                RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+            }            
             steps {
                 echo 'Building..'
                 sh 'docker-compose build'
