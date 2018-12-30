@@ -4,8 +4,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-
-            }
+                sh 'docker-compose build'
+                echo 'Pushing images to docker hub'
+                withDockerRegistry([ credentialsId: "jenkins-docker-credentials", url: "" ]) {
+                        sh 'docker push aabor/rstudio:latest'
+                        sh 'docker push aabor/rstudio-finance:latest'
+                        sh 'docker push aabor/rstudio-text:latest'
+                        }
+                }
         }
         stage('Test') {
             steps {
