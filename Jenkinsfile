@@ -9,7 +9,7 @@ pipeline {
             }            
             steps {
                 echo 'Building..'
-                sh 'docker-compose build'
+                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml build'
                 echo 'login to docker'
                 sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Pushing images to docker hub'
