@@ -9,7 +9,7 @@ pipeline {
             }            
             steps {
                 echo 'login to docker'
-                docker login -u $DOCKER_CREDS_USR  -p DOCKER_CREDS_PSW
+                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Building..'
                 sh 'docker-compose build'
                 echo 'Pushing images to docker hub'
