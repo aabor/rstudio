@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
@@ -15,11 +14,12 @@ pipeline {
         }
         stage('Deploy') {
             environment { 
+                USER=credentials('jenkins-current-user')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
                 echo 'Deploying....'
-                sh /* CORRECT */ '''
+                sh '''
                     docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans
                 '''
                 mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text started',
