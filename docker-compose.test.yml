@@ -1,9 +1,10 @@
 version: '3'
 services:
   sut:
-    build: /home/$USER/r-projects/rstudio-finance/tests/
-    depends_on:
-      - selenium
-      - rstudio-finance
-    networks:
-      - backend
+    build: /home/$USER/docker/rstudio
+    command: uname -a
+    # depends_on:
+    #   - selenium
+    #   - rstudio-finance
+    # networks:
+    #   - backend
