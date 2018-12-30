@@ -9,13 +9,6 @@ pipeline {
             }            
             steps {
                 echo 'Building..'
-                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml build'
-                echo 'login to docker'
-                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
-                echo 'Pushing images to docker hub'
-                sh 'docker push aabor/rstudio:latest'
-                sh 'docker push aabor/rstudio-finance:latest'
-                sh 'docker push aabor/rstudio-text:latest'
                 }
         }
         stage('Test') {
