@@ -4,17 +4,19 @@ pipeline {
         stage('Build') {
             environment { 
                 USER=credentials('jenkins-current-user')
-                RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+                DOCKER_CREDS=credentials('jenkins-docker-cred')
+                RSTUDIO_COMMON_CREDS = credentials             
+                ('jenkins-rstudio-common-creds')
             }            
             steps {
+                echo 'login to docker'
+                docker login -u $DOCKER_CREDS_USR  -p DOCKER_CREDS_PSW
                 echo 'Building..'
                 sh 'docker-compose build'
                 echo 'Pushing images to docker hub'
-                withDockerRegistry([ credentialsId: "jenkins-docker-credentials", url: "" ]) {
-                        sh 'docker push aabor/rstudio:latest'
-                        sh 'docker push aabor/rstudio-finance:latest'
-                        sh 'docker push aabor/rstudio-text:latest'
-                        }
+                sh 'docker push aabor/rstudio:latest'
+                sh 'docker push aabor/rstudio-finance:latest'
+                sh 'docker push aabor/rstudio-text:latest'
                 }
         }
         stage('Test') {
