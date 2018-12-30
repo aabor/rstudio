@@ -5,8 +5,7 @@ pipeline {
             environment { 
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-cred')
-                RSTUDIO_COMMON_CREDS = credentials             
-                ('jenkins-rstudio-common-creds')
+                RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
                 echo 'login to docker'
