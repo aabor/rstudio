@@ -8,8 +8,10 @@ services:
     - |
       uname -a 
       R --version
-      Rscript -e "Sys.info()"
-      Rscript -e "sessionInfo()"
+      Rscript -<<EOF
+        Sys.info()
+        sessionInfo()
+      EOF
     
     # depends_on:
     #   - selenium
