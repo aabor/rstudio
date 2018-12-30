@@ -1,8 +1,12 @@
 version: '3'
 services:
   sut:
-    build: /home/$USER/docker/rstudio
-    command: uname -a
+    build: .
+    command: >
+      sh -c 'uname -a && 
+            R --version &&
+            Rscript -e "Sys.info()" &&
+            Rscript -e "sessionInfo()"'
     # depends_on:
     #   - selenium
     #   - rstudio-finance
