@@ -8,10 +8,10 @@ pipeline {
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
-                echo 'login to docker'
-                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Building..'
                 sh 'docker-compose build'
+                echo 'login to docker'
+                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Pushing images to docker hub'
                 sh 'docker push aabor/rstudio:latest'
                 sh 'docker push aabor/rstudio-finance:latest'
