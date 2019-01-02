@@ -46,7 +46,7 @@ services:
       - /home/$USER/Documents:/home/rstudio/Documents
       - /home/$USER/Selenium:/home/rstudio/Selenium
       - /home/$USER/Documents/Trading/fh_data-dev:/home/rstudio/projects/fh/data
-      # folder with quotes updated by MetaTrader
+      - /home/$USER/Documents/Trading/csv-arch:/home/rstudio/projects/fh/data/csv-arch
       - /home/$USER/Dropbox/mt4/data-dev:/home/rstudio/projects/fh/data/mt4
       # SSH keys
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
