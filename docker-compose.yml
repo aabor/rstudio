@@ -45,14 +45,14 @@ services:
       - /home/$USER/r-projects/rstudio-finance:/home/rstudio  
       - /home/$USER/Documents:/home/rstudio/Documents
       - /home/$USER/Selenium:/home/rstudio/Selenium
-      - /home/$USER/Documents/Trading/fh_data-dev:/home/rstudio/projects/fh-dev/data
+      - /home/$USER/Documents/Trading/fh_data-dev:/home/rstudio/projects/fh/data
       # folder with quotes updated by MetaTrader
-      - /home/$USER/Dropbox/mt4/data-dev:/home/rstudio/projects/fh-dev/data/mt4
+      - /home/$USER/Dropbox/mt4/data-dev:/home/rstudio/projects/fh/data/mt4
       # SSH keys
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       # Secrets
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.httr-oauth:/home/rstudio/projects/fh-dev/.httr-oauth
+      - /home/$USER/.httr-oauth:/home/rstudio/projects/fh/.httr-oauth
       # shiny server
       - /home/$USER/r-projects/rstudio-finance:/srv/shiny-server 
       - /home/$USER/r-projects/rstudio-finance/.log:/var/log/shiny-server
