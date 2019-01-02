@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Stop') {
+            environment { 
+                USER=credentials('jenkins-current-user')
+                DOCKER_CREDS=credentials('jenkins-docker-credentials')
+                RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+            }            
+            steps {
+                echo 'Stopping containers...'
+                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml down'
+                mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text stopped',
+                        from: 'aaborochkin@gmail.com',
+                        subject: 'rocker successfully stopped by user request',
+                        to: 'aaborochkin@gmail.com'  
+            }
+        }
+    }
+}
