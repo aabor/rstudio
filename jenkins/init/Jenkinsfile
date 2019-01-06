@@ -6,6 +6,10 @@ pipeline {
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-credentials')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+                RSTUDIO_PATH="/home/$USER/rstudio"
+                DOCUMENTS_PATH="/home/$USER/Documents"
+                SELENIUM_PATH="/home/$USER/Selenium"
+                MT4_PATH="/home/$USER/Dropbox/mt4"
             }            
             steps {
                 echo 'Building..'
