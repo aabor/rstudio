@@ -17,7 +17,7 @@ services:
     build: /home/$USER/docker/rstudio
     volumes:
       - $RSTUDIO_PATH/rstudio:/home/rstudio
-      - /home/$USER/R:/home/rstudio
+      - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
       - $SELENIUM_PATH:/home/rstudio/Selenium
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
@@ -41,7 +41,7 @@ services:
     build: /home/$USER/docker/rstudio-finance
     volumes:
       - $RSTUDIO_PATH/rstudio-finance:/home/rstudio  
-      - /home/$USER/R:/home/rstudio
+      - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
       - $SELENIUM_PATH:/home/rstudio/Selenium
       - $DOCUMENTS_PATH/Trading/fh_data-dev:/home/rstudio/R/fh/data
@@ -71,7 +71,7 @@ services:
     build: /home/$USER/docker/rstudio-text
     volumes:
       - $RSTUDIO_PATH/rstudio-text:/home/rstudio  
-      - /home/$USER/R:/home/rstudio
+      - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
       - $SELENIUM_PATH:/home/rstudio/Selenium
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
