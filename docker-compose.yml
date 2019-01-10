@@ -6,7 +6,7 @@ services:
     environment:
       - TZ="GMT"
     ports:
-      - "4444:4444"
+      - "4443:4444"
     volumes:
       - /dev/shm:/dev/shm
       - $SELENIUM_PATH:/home/seluser/Downloads
