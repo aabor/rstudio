@@ -84,10 +84,10 @@ survival
 ## Packages additional to ggplot
 
 # rstudio-finance docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics.
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics: quantmod, qrmtools, rugarch among others.
 
 # rstudio-text docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing.
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: qdap, topicmodels, textmineR, tesseract, stringdist among others.
 
 # docker-compose
 Creates containers:
