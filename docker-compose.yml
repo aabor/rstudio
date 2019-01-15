@@ -1,22 +1,9 @@
 version: '3'
 services:
-  selenium:
-    container_name: selenium
-    image: selenium/standalone-firefox:3.141.59-bismuth
-    environment:
-      - TZ="GMT"
-    ports:
-      - "4443:4444"
-    volumes:
-      - /dev/shm:/dev/shm
-      - $SELENIUM_PATH:/home/seluser/Downloads
-    networks: 
-      - backend
-    restart: always
   rstudio: 
     container_name: rstudio
     image: aabor/rstudio:latest
-    build: /home/$USER/docker/rstudio
+    build: rstudio/.
     volumes:
       - $RSTUDIO_PATH/rstudio:/home/rstudio
       - /home/$USER/R:/home/rstudio/R
@@ -30,18 +17,14 @@ services:
       - "8787:8787"
       - "3838:3838"
     environment:
-      - TZ="GMT"
+      - TZ="Europe/Kiev"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    networks: 
-      - backend
     restart: always
-    depends_on:
-      - selenium
   rstudio-finance: 
     container_name: rstudio-finance
     image: aabor/rstudio-finance:latest
-    build: /home/$USER/docker/rstudio-finance
+    build: rstudio-finance/.
     volumes:
       - $RSTUDIO_PATH/rstudio-finance:/home/rstudio  
       - /home/$USER/R:/home/rstudio/R
@@ -59,20 +42,16 @@ services:
       - "8788:8787"
       - "3839:3838"
     environment:
-      - TZ="GMT"
+      - TZ="Europe/Kiev"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     links:
       - selenium:selenium
-    networks: 
-      - backend
     restart: always
-    depends_on:
-      - selenium
   rstudio-text: 
     container_name: rstudio-text
     image: aabor/rstudio-text:latest
-    build: /home/$USER/docker/rstudio-text
+    build: rstudio-text/.
     volumes:
       - $RSTUDIO_PATH/rstudio-text:/home/rstudio  
       - /home/$USER/R:/home/rstudio/R
@@ -86,14 +65,7 @@ services:
       - "8789:8787"
       - "3840:3838"
     environment:
-      - TZ="GMT"
+      - TZ="Europe/Kiev"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    networks: 
-      - backend
     restart: always
-    depends_on:
-      - selenium
-networks: 
-  backend:
-    driver: bridge
