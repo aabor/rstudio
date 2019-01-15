@@ -8,7 +8,6 @@ services:
       - $RSTUDIO_PATH/rstudio:/home/rstudio
       - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
-      - $SELENIUM_PATH:/home/rstudio/Selenium
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - $RSTUDIO_PATH/rstudio:/srv/shiny-server 
@@ -29,7 +28,6 @@ services:
       - $RSTUDIO_PATH/rstudio-finance:/home/rstudio  
       - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
-      - $SELENIUM_PATH:/home/rstudio/Selenium
       - $DOCUMENTS_PATH/Trading/fh_data-dev:$FH_PATH/data
       - $DOCUMENTS_PATH/Trading/csv-arch:$FH_PATH/data/csv-arch
       - $DOCUMENTS_PATH/Trading/news-arch:$FH_PATH/data/news-arch
@@ -56,7 +54,6 @@ services:
       - $RSTUDIO_PATH/rstudio-text:/home/rstudio  
       - /home/$USER/R:/home/rstudio/R
       - $DOCUMENTS_PATH:/home/rstudio/Documents
-      - $SELENIUM_PATH:/home/rstudio/Selenium
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - $RSTUDIO_PATH/rstudio-text:/srv/shiny-server 
