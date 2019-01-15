@@ -45,8 +45,6 @@ services:
       - TZ="Europe/Kiev"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    links:
-      - selenium:selenium
     restart: always
   rstudio-text: 
     container_name: rstudio-text
