@@ -1,4 +1,4 @@
-# rstudio
+# rstudio docker image
 ## Libraries added
 RStudio in docker container with additional packages.
 
@@ -83,6 +83,12 @@ survival
 
 ## Packages additional to ggplot
 
+# rstudio-finance docker image
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics.
+
+# rstudio-text docker image
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing.
+
 # docker-compose
 Creates containers:
 
@@ -91,14 +97,3 @@ rstudio
 rstudio-finance
 
 rstudio-text
-
-selenium
-
-To start using Selenium:
-```
-library('RSelenium')
-rd <- rsDriver(remoteServerAddr = 'selenium', port = 4444L, verbose = TRUE, browser = 'firefox')
-# get browser
-browser <- rd$client
-# start testing
-```

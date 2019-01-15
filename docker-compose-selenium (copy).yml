@@ -1,0 +1,99 @@
+version: '3'
+services:
+  selenium:
+    container_name: selenium
+    image: selenium/standalone-firefox:3.141.59-bismuth
+    environment:
+      - TZ="GMT"
+    ports:
+      - "4443:4444"
+    volumes:
+      - /dev/shm:/dev/shm
+      - $SELENIUM_PATH:/home/seluser/Downloads
+    networks: 
+      - backend
+    restart: always
+  rstudio: 
+    container_name: rstudio
+    image: aabor/rstudio:latest
+    build: /home/$USER/docker/rstudio
+    volumes:
+      - $RSTUDIO_PATH/rstudio:/home/rstudio
+      - /home/$USER/R:/home/rstudio/R
+      - $DOCUMENTS_PATH:/home/rstudio/Documents
+      - $SELENIUM_PATH:/home/rstudio/Selenium
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - $RSTUDIO_PATH/rstudio:/srv/shiny-server 
+      - $RSTUDIO_PATH/rstudio/.log:/var/log/shiny-server
+    ports:
+      - "8787:8787"
+      - "3838:3838"
+    environment:
+      - TZ="GMT"
+      - USER=rstudio
+      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+  rstudio-finance: 
+    container_name: rstudio-finance
+    image: aabor/rstudio-finance:latest
+    build: /home/$USER/docker/rstudio-finance
+    volumes:
+      - $RSTUDIO_PATH/rstudio-finance:/home/rstudio  
+      - /home/$USER/R:/home/rstudio/R
+      - $DOCUMENTS_PATH:/home/rstudio/Documents
+      - $SELENIUM_PATH:/home/rstudio/Selenium
+      - $DOCUMENTS_PATH/Trading/fh_data-dev:$FH_PATH/data
+      - $DOCUMENTS_PATH/Trading/csv-arch:$FH_PATH/data/csv-arch
+      - $MT4_PATH/data-dev:$FH_PATH/data/mt4
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:$FH_PATH/.httr-oauth
+      - $RSTUDIO_PATH/rstudio-finance:/srv/shiny-server 
+      - $RSTUDIO_PATH/rstudio-finance/.log:/var/log/shiny-server
+    ports:
+      - "8788:8787"
+      - "3839:3838"
+    environment:
+      - TZ="GMT"
+      - USER=rstudio
+      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+    links:
+      - selenium:selenium
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+  rstudio-text: 
+    container_name: rstudio-text
+    image: aabor/rstudio-text:latest
+    build: /home/$USER/docker/rstudio-text
+    volumes:
+      - $RSTUDIO_PATH/rstudio-text:/home/rstudio  
+      - /home/$USER/R:/home/rstudio/R
+      - $DOCUMENTS_PATH:/home/rstudio/Documents
+      - $SELENIUM_PATH:/home/rstudio/Selenium
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - $RSTUDIO_PATH/rstudio-text:/srv/shiny-server 
+      - $RSTUDIO_PATH/rstudio-text/.log:/var/log/shiny-server      
+    ports:
+      - "8789:8787"
+      - "3840:3838"
+    environment:
+      - TZ="GMT"
+      - USER=rstudio
+      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+    networks: 
+      - backend
+    restart: always
+    depends_on:
+      - selenium
+networks: 
+  backend:
+    driver: bridge
