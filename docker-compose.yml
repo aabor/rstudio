@@ -32,7 +32,9 @@ services:
       - $SELENIUM_PATH:/home/rstudio/Selenium
       - $DOCUMENTS_PATH/Trading/fh_data-dev:$FH_PATH/data
       - $DOCUMENTS_PATH/Trading/csv-arch:$FH_PATH/data/csv-arch
+      - $DOCUMENTS_PATH/Trading/news-arch:$FH_PATH/data/news-arch
       - $MT4_PATH/data-dev:$FH_PATH/data/mt4
+      - $NEWS_PATH/data-dev:$FH_PATH/data/news
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - /home/$USER/.httr-oauth:$FH_PATH/.httr-oauth
