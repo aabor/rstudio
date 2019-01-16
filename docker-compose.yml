@@ -10,6 +10,8 @@ services:
       - $DOCUMENTS_PATH:/home/rstudio/Documents
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
       - $RSTUDIO_PATH/rstudio:/srv/shiny-server 
       - $RSTUDIO_PATH/rstudio/.log:/var/log/shiny-server
     ports:
@@ -35,7 +37,8 @@ services:
       - $NEWS_PATH/data-dev:$FH_PATH/data/news
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.httr-oauth:$FH_PATH/.httr-oauth
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
       - $RSTUDIO_PATH/rstudio-finance:/srv/shiny-server 
       - $RSTUDIO_PATH/rstudio-finance/.log:/var/log/shiny-server
     ports:
@@ -56,6 +59,8 @@ services:
       - $DOCUMENTS_PATH:/home/rstudio/Documents
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
       - $RSTUDIO_PATH/rstudio-text:/srv/shiny-server 
       - $RSTUDIO_PATH/rstudio-text/.log:/var/log/shiny-server      
     ports:
