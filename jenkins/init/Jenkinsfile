@@ -10,7 +10,6 @@ pipeline {
                 DOCUMENTS_PATH="/home/$USER/Documents"
                 SELENIUM_PATH="/home/$USER/Selenium"
                 MT4_PATH="/home/$USER/Dropbox/mt4"
-                NEWS_PATH="/home/$USER/Dropbox/news"
                 FH_PATH="/home/rstudio/R/fh"
             }            
             steps {

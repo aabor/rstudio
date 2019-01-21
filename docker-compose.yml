@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   rstudio: 
     container_name: rstudio
@@ -22,6 +22,8 @@ services:
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
+    networks: 
+      - selenium-hub
   rstudio-finance: 
     container_name: rstudio-finance
     image: aabor/rstudio-finance:latest
@@ -34,7 +36,6 @@ services:
       - $DOCUMENTS_PATH/Trading/csv-arch:$FH_PATH/data/csv-arch
       - $DOCUMENTS_PATH/Trading/news-arch:$FH_PATH/data/news-arch
       - $MT4_PATH/data-dev:$FH_PATH/data/mt4
-      - $NEWS_PATH/data-dev:$FH_PATH/data/news
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
@@ -49,6 +50,8 @@ services:
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
+    networks: 
+      - selenium-hub
   rstudio-text: 
     container_name: rstudio-text
     image: aabor/rstudio-text:latest
@@ -71,3 +74,8 @@ services:
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
+    networks: 
+      - selenium-hub
+networks:
+  selenium-hub:
+    external: true

@@ -310,3 +310,7 @@ RUN sudo installGithub.r \
 #   RSelenium \
 #   && rm -rf /tmp/downloaded_packages/
 
+RUN install2.r --error \ 
+    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R documentation around your functions.
+    plumber \
+    && rm -rf /tmp/downloaded_packages/
