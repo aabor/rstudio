@@ -19,6 +19,7 @@ services:
       - "3838:3838"
     environment:
       - TZ="Europe/Kiev"
+      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
@@ -47,6 +48,7 @@ services:
       - "3839:3838"
     environment:
       - TZ="Europe/Kiev"
+      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
@@ -71,6 +73,7 @@ services:
       - "3840:3838"
     environment:
       - TZ="Europe/Kiev"
+      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
