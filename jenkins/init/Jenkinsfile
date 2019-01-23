@@ -28,7 +28,12 @@ pipeline {
                 echo 'Pushing rstudio-text:latest to docker hub'
                 sh 'docker push aabor/rstudio-text:latest'
                 echo 'starting docker containers'
-                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml up -d --remove-orphans'
+                sh '''
+                    cd $SOURCE_CODE
+                    export GIT_VERSION=$(git describe --tags | sed s/v//)
+                    echo $GIT_VERSION
+                    docker-compose up -d --remove-orphans
+                '''
                 mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text started',
                         from: 'aaborochkin@gmail.com',
                         subject: 'rocker successfully rolled out',
