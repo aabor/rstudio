@@ -6,6 +6,7 @@ pipeline {
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-credentials')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+                SOURCE_CODE="/home/$USER/docker/rstudio"
                 RSTUDIO_PATH="/home/$USER/rstudio"
                 DOCUMENTS_PATH="/home/$USER/Documents"
                 SELENIUM_PATH="/home/$USER/Selenium"
@@ -14,7 +15,10 @@ pipeline {
             }            
             steps {
                 echo 'Building..'
-                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml build'
+                sh '''
+                    cd $SOURCE_CODE
+                    sh/build_image.sh                    
+                '''
                 echo 'login to docker'
                 sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Pushing rstudio:latest to docker hub'
