@@ -5,15 +5,15 @@ services:
     image: aabor/rstudio:latest
     build: rstudio/.
     volumes:
-      - ~docker/rstudio/rstudio:/home/rstudio
-      - ~/R:/home/rstudio/R
-      - ~/Documents:/home/rstudio/Documents
-      - ~/.ssh:/home/rstudio/.ssh/  
-      - ~/.secrets:/home/rstudio/.secrets/  
-      - ~/.httr-oauth:/home/rstudio/.httr-oauth
-      - ~/.gitconfig:/home/rstudio/.gitconfig
-      - ~docker/rstudio/rstudio:/srv/shiny-server 
-      - ~docker/rstudio/rstudio/.log:/var/log/shiny-server
+      - /home/aabor/docker/rstudio/rstudio:/home/rstudio
+      - /home/aabor/R:/home/rstudio/R
+      - /home/aabor/Documents:/home/rstudio/Documents
+      - /home/aabor/.ssh:/home/rstudio/.ssh/  
+      - /home/aabor/.secrets:/home/rstudio/.secrets/  
+      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
+      - /home/aabor/docker/rstudio/rstudio:/srv/shiny-server 
+      - /home/aabor/docker/rstudio/rstudio/.log:/var/log/shiny-server
     ports:
       - "8787:8787"
       - "3838:3838"
@@ -30,19 +30,19 @@ services:
     image: aabor/rstudio-finance:latest
     build: rstudio-finance/.
     volumes:
-      - ~docker/rstudio/rstudio-finance:/home/rstudio  
-      - ~/R:/home/rstudio/R
-      - ~/Documents:/home/rstudio/Documents
-      - ~/Documents/Trading/fh_data-dev:$FH_PATH/data
-      - ~/Documents/Trading/csv-arch:$FH_PATH/data/csv-arch
-      - ~/Documents/Trading/news-arch:$FH_PATH/data/news-arch
+      - /home/aabor/docker/rstudio/rstudio-finance:/home/rstudio  
+      - /home/aabor/R:/home/rstudio/R
+      - /home/aabor/Documents:/home/rstudio/Documents
+      - /home/aabor/Documents/Trading/fh_data-dev:$FH_PATH/data
+      - /home/aabor/Documents/Trading/csv-arch:$FH_PATH/data/csv-arch
+      - /home/aabor/Documents/Trading/news-arch:$FH_PATH/data/news-arch
       - $MT4_PATH/data-dev:$FH_PATH/data/mt4
-      - ~/.ssh:/home/rstudio/.ssh/  
-      - ~/.secrets:/home/rstudio/.secrets/  
-      - ~/.httr-oauth:/home/rstudio/.httr-oauth
-      - ~/.gitconfig:/home/rstudio/.gitconfig
-      - ~docker/rstudio/rstudio-finance:/srv/shiny-server 
-      - ~docker/rstudio/rstudio-finance/.log:/var/log/shiny-server
+      - /home/aabor/.ssh:/home/rstudio/.ssh/  
+      - /home/aabor/.secrets:/home/rstudio/.secrets/  
+      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
+      - /home/aabor/docker/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/aabor/docker/rstudio/rstudio-finance/.log:/var/log/shiny-server
     ports:
       - "8788:8787"
       - "3839:3838"
@@ -59,15 +59,15 @@ services:
     image: aabor/rstudio-text:latest
     build: rstudio-text/.
     volumes:
-      - ~docker/rstudio/rstudio-text:/home/rstudio  
-      - ~/R:/home/rstudio/R
-      - ~/Documents:/home/rstudio/Documents
-      - ~/.ssh:/home/rstudio/.ssh/  
-      - ~/.secrets:/home/rstudio/.secrets/  
-      - ~/.httr-oauth:/home/rstudio/.httr-oauth
-      - ~/.gitconfig:/home/rstudio/.gitconfig
-      - ~docker/rstudio/rstudio-text:/srv/shiny-server 
-      - ~docker/rstudio/rstudio-text/.log:/var/log/shiny-server      
+      - /home/aabor/docker/rstudio/rstudio-text:/home/rstudio  
+      - /home/aabor/R:/home/rstudio/R
+      - /home/aabor/Documents:/home/rstudio/Documents
+      - /home/aabor/.ssh:/home/rstudio/.ssh/  
+      - /home/aabor/.secrets:/home/rstudio/.secrets/  
+      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
+      - /home/aabor/docker/rstudio/rstudio-text:/srv/shiny-server 
+      - /home/aabor/docker/rstudio/rstudio-text/.log:/var/log/shiny-server      
     ports:
       - "8789:8787"
       - "3840:3838"
