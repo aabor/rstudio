@@ -6,16 +6,13 @@ pipeline {
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-credentials')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
-                RSTUDIO_PATH="/home/$USER/rstudio"
-                DOCUMENTS_PATH="/home/$USER/Documents"
-                SELENIUM_PATH="/home/$USER/Selenium"
                 MT4_PATH="/home/$USER/Dropbox/mt4"
                 NEWS_PATH="/home/$USER/Dropbox/news"
                 FH_PATH="/home/rstudio/R/fh"
             }            
             steps {
                 echo 'Stopping containers...'
-                sh 'docker-compose -f /home/$USER/docker/rstudio/docker-compose.yml down'
+                sh 'docker-compose down'
                 mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text stopped',
                         from: 'aaborochkin@gmail.com',
                         subject: 'rocker successfully stopped by user request',
