@@ -12,8 +12,8 @@ services:
       - /home/aabor/.secrets:/home/rstudio/.secrets/  
       - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
       - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/docker/rstudio/rstudio:/srv/shiny-server 
-      - /home/aabor/docker/rstudio/rstudio/.log:/var/log/shiny-server
+      - /home/aabor/rstudio/rstudio:/srv/shiny-server 
+      - /home/aabor/rstudio/rstudio/.log:/var/log/shiny-server
     ports:
       - "8787:8787"
       - "3838:3838"
@@ -41,8 +41,8 @@ services:
       - /home/aabor/.secrets:/home/rstudio/.secrets/  
       - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
       - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/docker/rstudio/rstudio-finance:/srv/shiny-server 
-      - /home/aabor/docker/rstudio/rstudio-finance/.log:/var/log/shiny-server
+      - /home/aabor/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/aabor/rstudio/rstudio-finance/.log:/var/log/shiny-server
     ports:
       - "8788:8787"
       - "3839:3838"
@@ -66,8 +66,8 @@ services:
       - /home/aabor/.secrets:/home/rstudio/.secrets/  
       - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
       - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/docker/rstudio/rstudio-text:/srv/shiny-server 
-      - /home/aabor/docker/rstudio/rstudio-text/.log:/var/log/shiny-server      
+      - /home/aabor/rstudio/rstudio-text:/srv/shiny-server 
+      - /home/aabor/rstudio/rstudio-text/.log:/var/log/shiny-server      
     ports:
       - "8789:8787"
       - "3840:3838"
