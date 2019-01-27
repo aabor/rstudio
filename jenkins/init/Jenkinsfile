@@ -1,35 +1,34 @@
 pipeline {
     agent any
+    label {
+            label ""
+            customWorkspace "/home/aabor/builds"
+        }
     stages {
         stage('Build') {
             environment { 
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-credentials')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
-                SOURCE_CODE="/home/$USER/docker/rstudio"
-                RSTUDIO_PATH="/home/$USER/rstudio"
-                DOCUMENTS_PATH="/home/$USER/Documents"
-                SELENIUM_PATH="/home/$USER/Selenium"
                 MT4_PATH="/home/$USER/Dropbox/mt4"
                 FH_PATH="/home/rstudio/R/fh"
             }            
             steps {
                 echo 'Building..'
+                sh' echo "Workspace dir is ${pwd()}"'
                 sh '''
-                    cd $SOURCE_CODE
                     sh/build_image.sh                    
                 '''
                 echo 'login to docker'
-                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
+                //sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
                 echo 'Pushing rstudio:latest to docker hub'
-                sh 'docker push aabor/rstudio:latest'
+                //sh 'docker push aabor/rstudio:latest'
                 echo 'Pushing rstudio-finance:latest to docker hub'
-                sh 'docker push aabor/rstudio-finance:latest'
+                //sh 'docker push aabor/rstudio-finance:latest'
                 echo 'Pushing rstudio-text:latest to docker hub'
-                sh 'docker push aabor/rstudio-text:latest'
+                //sh 'docker push aabor/rstudio-text:latest'
                 echo 'starting docker containers'
                 sh '''
-                    cd $SOURCE_CODE
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
                     echo $GIT_VERSION
                     docker-compose up -d --remove-orphans
