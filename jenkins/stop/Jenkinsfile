@@ -21,13 +21,14 @@ pipeline {
                         subject: 'rocker successfully stopped by user request',
                         to: 'aaborochkin@gmail.com'  
             post {
-                always{
+                always {
                     cleanWs()
                     sh '''
                         pwd
                         ls
                         echo "Finishing.."
                     '''
+                    }
                 }
             }
         }
