@@ -1,18 +1,18 @@
 version: '3.5'
 services:
   rstudio: 
-    image: aabor/rstudio:latest
+    image: aabor/rstudio
     build: rstudio/.
     volumes:
-      - /home/aabor/rstudio/rstudio:/home/rstudio
-      - /home/aabor/R:/home/rstudio/R
-      - /home/aabor/Documents:/home/rstudio/Documents
-      - /home/aabor/.ssh:/home/rstudio/.ssh/  
-      - /home/aabor/.secrets:/home/rstudio/.secrets/  
-      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/rstudio/rstudio:/srv/shiny-server 
-      - /home/aabor/rstudio/rstudio/.log:/var/log/shiny-server
+      - /home/$USER/rstudio/rstudio:/home/rstudio
+      - /home/$USER/R:/home/rstudio/R
+      - /home/$USER/Documents:/home/rstudio/Documents
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
+      - /home/$USER/rstudio/rstudio:/srv/shiny-server 
+      - /home/$USER/rstudio/rstudio/.log:/var/log/shiny-server
     ports:
       - "8787:8787"
       - "3838:3838"
@@ -21,26 +21,26 @@ services:
       - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    restart: always
+    restart: "on-failure:30"
     networks: 
       - selenium-hub
   rstudio-finance: 
-    image: aabor/rstudio-finance:latest
+    image: aabor/rstudio-finance
     build: rstudio-finance/.
     volumes:
-      - /home/aabor/rstudio/rstudio-finance:/home/rstudio  
-      - /home/aabor/R:/home/rstudio/R
-      - /home/aabor/Documents:/home/rstudio/Documents
-      - /home/aabor/Documents/Trading/fh_data-dev:$FH_PATH/data
-      - /home/aabor/Documents/Trading/csv-arch:$FH_PATH/data/csv-arch
-      - /home/aabor/Documents/Trading/news-arch:$FH_PATH/data/news-arch
+      - /home/$USER/rstudio/rstudio-finance:/home/rstudio  
+      - /home/$USER/R:/home/rstudio/R
+      - /home/$USER/Documents:/home/rstudio/Documents
+      - /home/$USER/Documents/Trading/fh_data-dev:$FH_PATH/data
+      - /home/$USER/Documents/Trading/csv-arch:$FH_PATH/data/csv-arch
+      - /home/$USER/Documents/Trading/news-arch:$FH_PATH/data/news-arch
       - $MT4_PATH/data-dev:$FH_PATH/data/mt4
-      - /home/aabor/.ssh:/home/rstudio/.ssh/  
-      - /home/aabor/.secrets:/home/rstudio/.secrets/  
-      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/rstudio/rstudio-finance:/srv/shiny-server 
-      - /home/aabor/rstudio/rstudio-finance/.log:/var/log/shiny-server
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
+      - /home/$USER/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/$USER/rstudio/rstudio-finance/.log:/var/log/shiny-server
     ports:
       - "8788:8787"
       - "3839:3838"
@@ -49,22 +49,22 @@ services:
       - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    restart: always
+    restart: "on-failure:30"
     networks: 
       - selenium-hub
   rstudio-text: 
-    image: aabor/rstudio-text:latest
+    image: aabor/rstudio-text
     build: rstudio-text/.
     volumes:
-      - /home/aabor/rstudio/rstudio-text:/home/rstudio  
-      - /home/aabor/R:/home/rstudio/R
-      - /home/aabor/Documents:/home/rstudio/Documents
-      - /home/aabor/.ssh:/home/rstudio/.ssh/  
-      - /home/aabor/.secrets:/home/rstudio/.secrets/  
-      - /home/aabor/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/aabor/.gitconfig:/home/rstudio/.gitconfig
-      - /home/aabor/rstudio/rstudio-text:/srv/shiny-server 
-      - /home/aabor/rstudio/rstudio-text/.log:/var/log/shiny-server      
+      - /home/$USER/rstudio/rstudio-text:/home/rstudio  
+      - /home/$USER/R:/home/rstudio/R
+      - /home/$USER/Documents:/home/rstudio/Documents
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
+      - /home/$USER/rstudio/rstudio-text:/srv/shiny-server 
+      - /home/$USER/rstudio/rstudio-text/.log:/var/log/shiny-server      
     ports:
       - "8789:8787"
       - "3840:3838"
@@ -73,7 +73,7 @@ services:
       - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
-    restart: always
+    restart: "on-failure:30"
     networks: 
       - selenium-hub
 networks:
