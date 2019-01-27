@@ -5,7 +5,7 @@ services:
     image: aabor/rstudio:latest
     build: rstudio/.
     volumes:
-      - /home/aabor/docker/rstudio/rstudio:/home/rstudio
+      - /home/aabor/rstudio/rstudio:/home/rstudio
       - /home/aabor/R:/home/rstudio/R
       - /home/aabor/Documents:/home/rstudio/Documents
       - /home/aabor/.ssh:/home/rstudio/.ssh/  
@@ -30,7 +30,7 @@ services:
     image: aabor/rstudio-finance:latest
     build: rstudio-finance/.
     volumes:
-      - /home/aabor/docker/rstudio/rstudio-finance:/home/rstudio  
+      - /home/aabor/rstudio/rstudio-finance:/home/rstudio  
       - /home/aabor/R:/home/rstudio/R
       - /home/aabor/Documents:/home/rstudio/Documents
       - /home/aabor/Documents/Trading/fh_data-dev:$FH_PATH/data
@@ -59,7 +59,7 @@ services:
     image: aabor/rstudio-text:latest
     build: rstudio-text/.
     volumes:
-      - /home/aabor/docker/rstudio/rstudio-text:/home/rstudio  
+      - /home/aabor/rstudio/rstudio-text:/home/rstudio  
       - /home/aabor/R:/home/rstudio/R
       - /home/aabor/Documents:/home/rstudio/Documents
       - /home/aabor/.ssh:/home/rstudio/.ssh/  
