@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    label {
+    /*label {
             label ""
             customWorkspace "/home/aabor/builds"
-        }
+        }*/
     stages {
         stage('Build') {
             environment { 
