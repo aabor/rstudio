@@ -19,10 +19,13 @@ pipeline {
                     echo $GIT_VERSION
                     echo "Pushing rstudio:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio:$GIT_VERSION
+                    docker push aabor/rstudio:latest
                     echo "Pushing rstudio-finance:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-finance:$GIT_VERSION
+                    docker push aabor/rstudio-finance:latest
                     echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-text:$GIT_VERSION
+                    docker push aabor/rstudio-text:latest
                     echo "starting docker containers"
                     docker-compose up -d --remove-orphans
                 '''
