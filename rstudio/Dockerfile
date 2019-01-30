@@ -130,6 +130,13 @@ RUN install2.r --error \
     survival \
     && rm -rf /tmp/downloaded_packages/
 
+RUN install2.r --error \
+    # A Tool Kit for Working with Time Series in R
+    timetk \
+    # Bringing financial analysis to the 'tidyverse'. The 'tidyquant' package provides a convenient wrapper to various 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions and returns the objects in the tidy 'tibble' format. The main advantage is being able to use quantitative functions with the 'tidyverse' functions including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc.
+    tidyquant \
+    && rm -rf /tmp/downloaded_packages/
+
 # Add shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 
@@ -140,14 +147,6 @@ RUN install2.r --error \
     # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with the added benefit of removing the dependency on Java.
     openxlsx \
     && rm -rf /tmp/downloaded_packages/
-
-# web scrapping
-RUN install2.r --error \ 
-  # Wrappers around the 'xml2' and 'httr' packages to make it easy to download, then manipulate, HTML and XML.
-  rvest \
-  # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
-  gmailr \
-  && rm -rf /tmp/downloaded_packages/
 
 ##For shiny
 RUN install2.r --error \ 
@@ -178,7 +177,10 @@ RUN install2.r --error \
     feedeR \
     && rm -rf /tmp/downloaded_packages/
 
+# RESTful API
 RUN install2.r --error \ 
+    # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
+    gmailr \
     #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R documentation around your functions.
     plumber \
     # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger, level based filtering, space handling in messages and custom formatting.
