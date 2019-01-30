@@ -30,8 +30,6 @@ RUN apt-get update && apt-get install -y libfreetype6-dev \
 # in R graphs
 RUN install2.r --error \
   showtext \
-  #R string manipulation functions that account for the effects of ANSI text formatting control sequences
-  fansi \
   && rm -rf /tmp/downloaded_packages/
 
 #Additional ggplot packages
