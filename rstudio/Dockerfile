@@ -128,6 +128,10 @@ RUN install2.r --error \
     lmtest \
     # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
+    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
+    # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
+    # %overlaps% determines if two date ranges overlap
+    DescTools \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \

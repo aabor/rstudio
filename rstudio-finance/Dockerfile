@@ -9,13 +9,6 @@ RUN installGithub.r \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
-    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
-    # consisting of calculating descriptive statistics, drawing graphical summaries
-    # and reporting the results
-    # %overlaps% determines if two date ranges overlap
-    DescTools \
-    # Quantitative Financial Modelling Framework
-    quantmod \
     # Various data sets (stocks, stock indices, constituent data, FX, zero-coupon bond yield curves, volatility, commodities) for Quantitative Risk Management practice
     qrmdata \
     && rm -rf /tmp/downloaded_packages/
