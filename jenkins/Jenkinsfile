@@ -13,22 +13,20 @@ pipeline {
                 echo 'Building..'
                 sh '''
                     sh/build_image.sh                    
-                '''
-                echo 'login to docker'
-                sh 'docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW'
-                echo 'Pushing rstudio:latest to docker hub'
-                sh 'docker push aabor/rstudio:latest'
-                echo 'Pushing rstudio-finance:latest to docker hub'
-                sh 'docker push aabor/rstudio-finance:latest'
-                echo 'Pushing rstudio-text:latest to docker hub'
-                sh 'docker push aabor/rstudio-text:latest'
-                echo 'starting docker containers'
-                sh '''
+                    echo 'login to docker'
+                    docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
                     echo $GIT_VERSION
+                    echo "Pushing rstudio:$GIT_VERSION to docker hub"
+                    docker push aabor/rstudio:$GIT_VERSION
+                    echo "Pushing rstudio-finance:$GIT_VERSION to docker hub"
+                    docker push aabor/rstudio-finance:$GIT_VERSION
+                    echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
+                    docker push aabor/rstudio-text:$GIT_VERSION
+                    echo "starting docker containers"
                     docker-compose up -d --remove-orphans
                 '''
-                mail    body: 'containers selenium, rstudio, rstudio-finance, rstudio-text started',
+                mail    body: 'containers rstudio, rstudio-finance, rstudio-text started',
                         from: 'aaborochkin@gmail.com',
                         subject: 'rocker successfully rolled out',
                         to: 'aaborochkin@gmail.com'  
