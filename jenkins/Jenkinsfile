@@ -10,9 +10,17 @@ pipeline {
                 FH_PATH="/home/rstudio/R/fh"
             }            
             steps {
-                echo 'Building..'
+                echo 'Building and tagging..'
                 sh '''
-                    sh/build_image.sh                    
+                    export GIT_VERSION=$(git describe --tags | sed s/v//)
+                    docker-compose build
+                    docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
+                    docker tag $USER/rstudio-finance:latest $USER/rstudio-finance:$GIT_VERSION
+                    docker tag $USER/rstudio-text:latest $USER/rstudio-text:$GIT_VERSION
+                    docker system prune -f
+                '''
+                echo 'Pushing images..'
+                sh '''
                     echo 'login to docker'
                     docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
@@ -26,7 +34,9 @@ pipeline {
                     echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-text:$GIT_VERSION
                     docker push aabor/rstudio-text:latest
-                    echo "starting docker containers"
+                '''
+                echo "starting docker containers"
+                sh'''
                     docker-compose up -d --remove-orphans
                 '''
                 mail    body: 'containers rstudio, rstudio-finance, rstudio-text started',
