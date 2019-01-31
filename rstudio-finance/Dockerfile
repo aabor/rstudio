@@ -15,10 +15,11 @@ RUN install2.r --error \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
-    # # Tools for Quantitative Risk Management
-    # qrmtools \
-    # #ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit, forecast, simulation,
-    # inference and plotting rugarch \
+    # Tools for Quantitative Risk Management
+    qrmtools \
+    #ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit, forecast, simulation,
+    #inference and plotting 
+    rugarch \
     && rm -rf /tmp/downloaded_packages/
 
  # QuantLib installation

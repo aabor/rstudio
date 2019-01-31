@@ -1,6 +1,6 @@
 # aabor/rstudio
 # configured for automatic build
-FROM rocker/tidyverse:3.4.3
+FROM rocker/tidyverse:3.5.2
 
 LABEL maintainer="A. Borochkin"
 
