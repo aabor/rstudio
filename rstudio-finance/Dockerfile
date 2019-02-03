@@ -26,6 +26,13 @@ RUN install2.r --error \
 RUN  apt-get update && apt-get install -y \
     # QuantLib Library aims to provide a comprehensive software framework for quantitative finance. The goal is to
     # provide a standard open source library for quantitative analysis, modeling, trading, and risk management of
-    # financial assets    
+    # financial assets  
+    libquantlib0v5 \
+    libquantlib0-dev \
     libboost-all-dev \
-    r-cran-rquantlib quantlib-examples libquantlib0-dev
+    quantlib-python \
+    quantlib-examples
+# RUN install2.r --error \ 
+#     # R Interface to the 'QuantLib' Library
+#     RQuantLib \
+#     && rm -rf /tmp/downloaded_packages/

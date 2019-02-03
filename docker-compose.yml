@@ -18,7 +18,6 @@ services:
       - "3838:3838"
     environment:
       - TZ="Europe/Kiev"
-      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
@@ -32,10 +31,9 @@ services:
       - /home/$USER/rstudio/rstudio-finance:/home/rstudio  
       - /home/$USER/R:/home/rstudio/R
       - /home/$USER/Documents:/home/rstudio/Documents
-      - /home/$USER/Documents/Trading/fh_data-dev:$FH_PATH/data
-      - /home/$USER/Documents/Trading/csv-arch:$FH_PATH/data/csv-arch
-      - /home/$USER/Documents/Trading/news-arch:$FH_PATH/data/news-arch
-      - $MT4_PATH/data-dev:$FH_PATH/data/mt4
+      - /home/$USER/Documents/Trading/fh:/home/rstudio/R/fh/data
+      - /home/$USER/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
+      - /home/$USER/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
       - /home/$USER/.ssh:/home/rstudio/.ssh/  
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
@@ -47,7 +45,6 @@ services:
       - "3839:3838"
     environment:
       - TZ="Europe/Kiev"
-      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
@@ -72,7 +69,6 @@ services:
       - "3840:3838"
     environment:
       - TZ="Europe/Kiev"
-      - GIT_VERSION=$GIT_VERSION
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
