@@ -1,5 +1,8 @@
 # rstudio docker image
 ## Libraries added
+
+For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio/Dockerfile)
+
 RStudio in docker container with additional packages.
 
 openssh enabled.
@@ -8,13 +11,19 @@ Different Fonts 'TrueType', 'OpenType', Type 1, web fonts, etc.
 
 R packages for C++
 
-poppler
+poppler and corresponding R package pdftools
 
 shiny server
 
 Shiny packages
 
 RSelenium
+
+## Additional tidyverse companion packages for time series
+
+timetk
+
+tidyquant
 
 ## Statistical packages
 Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier
@@ -79,11 +88,19 @@ survival
 
 ## Packages additional to ggplot
 
+## RESTful API
+
+gmailr
+
+plumber
+
+logging # usufull for concurrent applications
+
 # rstudio-finance docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics: quantmod, qrmtools, rugarch among others.
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics: quantmod, qrmtools, rugarch among others. For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-finance/Dockerfile)
 
 # rstudio-text docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: qdap, topicmodels, textmineR, tesseract, stringdist among others.
+This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: qdap, topicmodels, textmineR, tesseract, stringdist among others. For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-text/Dockerfile)
 
 # docker-compose
 Creates containers:
