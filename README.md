@@ -11,17 +11,21 @@ Different Fonts 'TrueType', 'OpenType', Type 1, web fonts, etc.
 
 R packages for C++
 
-poppler and corresponding R package pdftools
+poppler # and corresponding R package for Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text, fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG, JPEG, TIFF format, or into raw bitmap vectors
+
+pdftools
 
 shiny server
 
-Shiny packages
-
-RSelenium
+## Shiny packages
 
 ## Additional tidyverse companion packages for time series
 
+A Tool Kit for Working with Time Series in R
+
 timetk
+
+Bringing financial analysis to the 'tidyverse'
 
 tidyquant
 
@@ -88,10 +92,27 @@ survival
 
 ## Packages additional to ggplot
 
+Based Publication Ready Plots
+
+ggpubr
+    
+Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points
+
+ggrepel
+
+Network Analysis and Visualization
+
+igraph 
+
+
 ## RESTful API
+
+Gmail RESTful API
 
 gmailr
 
+Generate and serve an HTTP API from R functions
+ 
 plumber
 
 logging # usufull for concurrent applications
