@@ -1,11 +1,8 @@
 # rstudio docker image
-## Libraries added
 
-For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio/Dockerfile)
+[`aabor/rstudio`](https://cloud.docker.com/u/aabor/repository/docker/aabor/rstudio) docker image is based on official [`rocker/tidyverse`](https://hub.docker.com/r/rocker/tidyverse/) image which contains RStudio and basic `tidyverse` packages. For precise and full description of installed packages in `aabor/rstudio` image, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio/Dockerfile).
 
-RStudio in docker container with additional packages.
-
-openssh enabled.
+`openssh` enabled.
 
 Different Fonts 'TrueType', 'OpenType', Type 1, web fonts, etc.
 
@@ -118,10 +115,10 @@ Generate and serve an HTTP API from R functions
 `logging` # usufull for concurrent applications
 
 # rstudio-finance docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics: quantmod, qrmtools, rugarch among others. For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-finance/Dockerfile)
+[`aabor/rstudio-finance`](https://cloud.docker.com/repository/docker/aabor/rstudio-finance) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting, tools for descriptive statistics: `quantmod`, `qrmtools`, `rugarch` among others. For precise and full description of installed packages in `aabor/rstudio-finance`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-finance/Dockerfile)
 
 # rstudio-text docker image
-This Docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: qdap, topicmodels, textmineR, tesseract, stringdist among others. For precise and full description of installed packages, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-text/Dockerfile)
+[`aabor/rstudio-text`](https://cloud.docker.com/repository/docker/aabor/rstudio-text) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: `qdap`, `topicmodels`, `textmineR`, `tesseract`, `stringdist` among others. For precise and full description of installed packages in `aabor/rstudio-text`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-text/Dockerfile)
 
 # docker-compose
 Creates containers:
