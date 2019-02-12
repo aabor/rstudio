@@ -6,15 +6,20 @@
 
 Different Fonts 'TrueType', 'OpenType', Type 1, web fonts, etc.
 
+Java 8
+
+openxlsx, XLConnect (Java dependent)
+
 R packages for C++
-
-`poppler` # and corresponding R package for Text Extraction, Rendering and Converting of PDF Documents. Utilities based on `libpoppler` for extracting text, fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG, JPEG, TIFF format, or into raw bitmap vectors
-
-`pdftools`
 
 `shiny server`
 
 ## Shiny packages
+
+shinydashboard, shinythemes
+
+Java dependent: DT, dygraphs
+
 
 ## Additional tidyverse companion packages for time series
 
@@ -119,6 +124,10 @@ Generate and serve an HTTP API from R functions
 
 # rstudio-text docker image
 [`aabor/rstudio-text`](https://cloud.docker.com/repository/docker/aabor/rstudio-text) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: `qdap`, `topicmodels`, `textmineR`, `tesseract`, `stringdist` among others. For precise and full description of installed packages in `aabor/rstudio-text`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-text/Dockerfile).
+
+`poppler` and corresponding R package `pdftools` for Text Extraction, Rendering and Converting of PDF Documents. Utilities based on `libpoppler` for extracting text, fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG, JPEG, TIFF format, or into raw bitmap vectors
+
+
 
 # docker-compose
 Creates containers:

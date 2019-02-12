@@ -15,10 +15,53 @@ RUN  apt-get update && apt-get install -y \
   xclip \
   && apt-get clean
 
-## gnupg is needed to add new key 
+# gnupg is needed to add new key 
 RUN apt-get update && apt-get install -y \
   gnupg2 \
   && apt-get clean
+
+# System utilities
+RUN install2.r --error \
+  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
+  fs \
+  #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
+  xfun \
+  # General Network (HTTP/FTP/...) Client Interface for R
+  RCurl \
+  && rm -rf /tmp/downloaded_packages/
+
+# Java 8
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    ## for rJava
+    default-jdk \
+    ## used to build rJava and other packages
+    libbz2-dev \
+    libicu-dev \
+    liblzma-dev \
+    ## system dependency of hunspell (devtools)
+    libhunspell-dev \
+    ## system dependency of hadley/pkgdown
+    libmagick++-dev \
+    ## rdf, for redland / linked data
+    librdf0-dev \
+    ## for V8-based javascript wrappers
+    libv8-dev \
+    && apt-get clean
+RUN install2.r --error \ 
+    rJava \
+    && rm -rf /tmp/downloaded_packages/
+
+# tidyverse packages for time series
+RUN install2.r --error \
+    # A Tool Kit for Working with Time Series in R
+    timetk \
+    # Bringing financial analysis to the 'tidyverse'. The 'tidyquant' package provides a convenient wrapper to various
+    # 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions and returns the objects in the tidy
+    # 'tibble' format. The main advantage is being able to use quantitative functions with the 'tidyverse' functions
+    # including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc.
+    tidyquant \
+    && rm -rf /tmp/downloaded_packages/
 
 ## install Fonts
 RUN apt-get update && apt-get install -y libfreetype6-dev \
@@ -41,22 +84,23 @@ RUN install2.r --error \
     ggrepel \
     # Network Analysis and Visualization
     igraph \
+    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
+    # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
+    # %overlaps% determines if two date ranges overlap
+    DescTools \
     && rm -rf /tmp/downloaded_packages/
 
-# install poppler, some dependencies of other R packages
-RUN apt-get update && apt-get install -y \
-    ## poppler to install pdftools to work with .pdf files
-    libpoppler-cpp-dev \
-    ## system dependency of hunspell (devtools)
-    libhunspell-dev \
-    ## system dependency of hadley/pkgdown
-    libmagick++-dev \
-    ## (GSL math library dependencies)
-    # for topicmodels on which depends textmineR
-    gsl-bin \
-    libgsl0-dev \
-    librdf0-dev \
-    && apt-get clean
+# RESTful API
+RUN install2.r --error \ 
+    # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
+    gmailr \
+    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R
+    #documentation around your functions.
+    plumber \
+    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger,
+    # level based filtering, space handling in messages and custom formatting.
+    logging \
+    && rm -rf /tmp/downloaded_packages/
 
 # Dependencies for Rmpfr, gmp
 RUN apt-get update && apt-get install -y \
@@ -95,15 +139,58 @@ RUN install2.r --error \
   testthis \
   && rm -rf /tmp/downloaded_packages/
 
-# System utilities
-RUN install2.r --error \
-  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
-  fs \
-  #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
-  xfun \
-  # General Network (HTTP/FTP/...) Client Interface for R
-  RCurl \
+# connection to Excel
+RUN install2.r --error \ 
+    # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing
+    # worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with
+    # the added benefit of removing the dependency on Java.
+    openxlsx \
+    # Provides comprehensive functionality to read, write and format Excel data. Java dependent.
+    XLConnect \
+    && rm -rf /tmp/downloaded_packages/
+
+RUN install2.r --error \ 
+    && rm -rf /tmp/downloaded_packages/
+
+# Add shiny server
+RUN export ADD=shiny && bash /etc/cont-init.d/add
+
+##For shiny
+RUN install2.r --error \ 
+  # Deployment Interface for R Markdown Documents and Shiny Applications. 
+  rsconnect \
+  # Functions to improve user experience of shiny apps by Dean Attali
+  shinyjs \
+  # Create dashboards with 'Shiny'. A dashboard has three parts: a header, a sidebar, and a body. 
+  shinydashboard \
+  #alter the overall appearance of your Shiny application
+  shinythemes \
+  # A colour picker that can be used as an input in Shiny apps or Rmarkdown documents. The colour picker supports alpha
+  # opacity, custom colour palettes, and many more options.
+  colourpicker \
+  # widgets to use in Shiny applications: Bootstrap switch, Material switch, Pretty Checkbox, Sweet Alert, Slider Text,
+  # Knob Input, Select picker, Checkbox and radio buttons, Search bar, Dropdown button
+  shinyWidgets \
   && rm -rf /tmp/downloaded_packages/
+
+##For shiny, Java dependent libraries
+RUN install2.r --error \ 
+  # R interface to the JavaScript library DataTables. R data objects (matrices or data frames) can be displayed as
+  # tables on HTML pages, and DataTables provides filtering, pagination, sorting, and many other features in the tables
+  DT \
+  # R interface to the dygraphs JavaScript charting library. It provides rich facilities for charting time-series data
+  dygraphs \
+  && rm -rf /tmp/downloaded_packages/
+
+
+RUN install2.r --error \ 
+    # easy and simple way to read, write and display bitmap images stored in the JPEG format
+    png \
+    # easy and simple way to read, write and display bitmap images stored in the PNG format
+    jpeg \
+    # Retrieve data from RSS/Atom feeds
+    feedeR \
+    && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
     #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines,
@@ -133,72 +220,4 @@ RUN install2.r --error \
     # core survival analysis routines, including definition of Surv objects, Kaplan-Meier and Aalen-Johansen
     # (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
-    # Tools for Descriptive Statistics first descriptive tasks in data analysis,
-    # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
-    # %overlaps% determines if two date ranges overlap
-    DescTools \
-    && rm -rf /tmp/downloaded_packages/
-
-RUN install2.r --error \
-    # A Tool Kit for Working with Time Series in R
-    timetk \
-    # Bringing financial analysis to the 'tidyverse'. The 'tidyquant' package provides a convenient wrapper to various
-    # 'xts', 'zoo', 'quantmod', 'TTR' and 'PerformanceAnalytics' package functions and returns the objects in the tidy
-    # 'tibble' format. The main advantage is being able to use quantitative functions with the 'tidyverse' functions
-    # including 'purrr', 'dplyr', 'tidyr', 'ggplot2', 'lubridate', etc.
-    tidyquant \
-    && rm -rf /tmp/downloaded_packages/
-
-# Add shiny server
-RUN export ADD=shiny && bash /etc/cont-init.d/add
-
-# connection to other applications: Excel, Acrobat, ...
-RUN install2.r --error \ 
-    # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text,
-    # fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG,
-    # JPEG, TIFF format, or into raw bitmap vectors
-    pdftools \
-    # Simplifies the creation of Excel .xlsx files by providing a high level interface to writing, styling and editing
-    # worksheets. Through the use of 'Rcpp', read/write times are comparable to the 'xlsx' and 'XLConnect' packages with
-    # the added benefit of removing the dependency on Java.
-    openxlsx \
-    && rm -rf /tmp/downloaded_packages/
-
-##For shiny
-RUN install2.r --error \ 
-  # Deployment Interface for R Markdown Documents and Shiny Applications. 
-  rsconnect \
-  # Functions to improve user experience of shiny apps by Dean Attali
-  shinyjs \
-  # Create dashboards with 'Shiny'. A dashboard has three parts: a header, a sidebar, and a body. 
-  shinydashboard \
-  #alter the overall appearance of your Shiny application
-  shinythemes \
-  # A colour picker that can be used as an input in Shiny apps or Rmarkdown documents. The colour picker supports alpha
-  # opacity, custom colour palettes, and many more options.
-  colourpicker \
-  # widgets to use in Shiny applications: Bootstrap switch, Material switch, Pretty Checkbox, Sweet Alert, Slider Text,
-  # Knob Input, Select picker, Checkbox and radio buttons, Search bar, Dropdown button
-  shinyWidgets \
-  && rm -rf /tmp/downloaded_packages/
-
-RUN install2.r --error \ 
-    # easy and simple way to read, write and display bitmap images stored in the JPEG format
-    png \
-    # easy and simple way to read, write and display bitmap images stored in the PNG format
-    jpeg \
-    # Retrieve data from RSS/Atom feeds
-    feedeR \
-    && rm -rf /tmp/downloaded_packages/
-
-# RESTful API
-RUN install2.r --error \ 
-    # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
-    gmailr \
-    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R
-    #documentation around your functions.
-    plumber \
-    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger,
-    # level based filtering, space handling in messages and custom formatting.
-    logging \
     && rm -rf /tmp/downloaded_packages/

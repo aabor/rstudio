@@ -1,5 +1,29 @@
 # aabor/rstudio-text
 FROM aabor/rstudio
+
+# install poppler, some dependencies of other R packages
+RUN apt-get update && apt-get install -y \
+    ## poppler to install pdftools to work with .pdf files
+    libpoppler-cpp-dev \
+    ## system dependency of hunspell (devtools)
+    libhunspell-dev \
+    ## system dependency of hadley/pkgdown
+    libmagick++-dev \
+    ## (GSL math library dependencies)
+    # for topicmodels on which depends textmineR
+    gsl-bin \
+    libgsl0-dev \
+    librdf0-dev \
+    && apt-get clean
+
+# Adobe Acrobat pdf files
+RUN install2.r --error \ 
+    # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text,
+    # fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG,
+    # JPEG, TIFF format, or into raw bitmap vectors
+    pdftools \
+    && rm -rf /tmp/downloaded_packages/
+
 # machine learning
 RUN install2.r --error \ 
      # #R string manipulation functions that account for the effects of ANSI text formatting control sequences fansi \
@@ -36,6 +60,7 @@ RUN install2.r --error \
     # Automatic Text Classification via Supervised Learning
     RTextTools \
     && rm -rf /tmp/downloaded_packages/
+
 # image processing
 RUN apt-get update && apt-get install -y \
     # for tesseract (OCR - Optical character recognition)
@@ -47,6 +72,7 @@ RUN install2.r --error \
     # OCR - Optical character recognition
     tesseract \
     && rm -rf /tmp/downloaded_packages/
+
 # bibliography
 RUN install2.r --error \ 
     # bibliography reference manager
@@ -56,20 +82,23 @@ RUN install2.r --error \
     gutenbergr \
     && rm -rf /tmp/downloaded_packages/
 
+#Java dependent libraries    
+RUN install2.r --error \ 
+    # transcript analysis, Text Mining/ Natural Language Processing: frequency counts of sentence types, words,
+    # sentences, turns of talk, syllables and other assorted analysis tasks
+    qdap \
+    #approximate string matching version of R's native 'match' function
+    stringdist \
+    # an R interface to WordNet , a large lexical database of English. 
+    wordnet \
+    # An R interface to Weka (Version 3.9.2). Weka is a collection of machine learning algorithms for data mining tasks
+    # written in Java, containing tools for data pre-processing, classification, regression, clustering, association
+    # rules, and visualization 
+    RWeka \
+    # an R interface to KEA (Version 5.0). KEA (for Keyphrase Extraction Algorithm) allows for extracting keyphrases
+    # from text documents. It can be either used for free indexing or for indexing with a controlled vocabulary.
+    RKEA \
+    && rm -rf /tmp/downloaded_packages/
+
 #RUN installGithub.r \
 #    && rm -rf /tmp/downloaded_packages/
-
-# #Java dependent libraries    
-# RUN install2.r --error \ 
-#     # transcript analysis, Text Mining/ Natural Language Processing: frequency counts of sentence types, words, sentences, turns of talk, syllables and other assorted analysis tasks
-#     qdap \
-#     #approximate string matching version of R's native 'match' function
-#     stringdist \
-#     # an R interface to WordNet , a large lexical database of English. 
-#     wordnet \
-#      # An R interface to Weka (Version 3.9.2). Weka is a collection of machine learning algorithms for data mining tasks written in Java, containing tools for data pre-processing, classification, regression, clustering, association rules, and visualization 
-#      RWeka \
-#     # an R interface to KEA (Version 5.0). KEA (for Keyphrase Extraction Algorithm) allows for extracting keyphrases from text documents. It can be either used for free indexing or for indexing with a controlled vocabulary.
-#     RKEA \
-#     && rm -rf /tmp/downloaded_packages/
-

@@ -1,4 +1,4 @@
-# aabor/rfin
+# aabor/rstudio-finance
 FROM aabor/rstudio
 # finance, forcasting
 RUN installGithub.r \
