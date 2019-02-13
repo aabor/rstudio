@@ -36,3 +36,9 @@ RUN  apt-get update && apt-get install -y \
 #     # R Interface to the 'QuantLib' Library
 #     RQuantLib \
 #     && rm -rf /tmp/downloaded_packages/
+
+RUN install2.r --error \ 
+    # Alpha Vantage has free historical financial information. All you need to do is get a free API key
+    alphavantager \
+    && rm -rf /tmp/downloaded_packages/
+
