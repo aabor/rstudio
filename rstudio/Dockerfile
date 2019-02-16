@@ -137,6 +137,11 @@ RUN install2.r --error \
   devtools \
   # R testing environment
   testthis \
+  # Provides infrastructure to accurately measure and compare the execution time of R expressions
+  microbenchmark \
+  # Benchmark your CPU and compare against other CPUs. Also provides functions for obtaining system specifications, such
+  # as RAM, CPU type, and R version.
+  benchmarkme \
   && rm -rf /tmp/downloaded_packages/
 
 # connection to Excel
