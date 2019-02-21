@@ -100,5 +100,28 @@ RUN install2.r --error \
     RKEA \
     && rm -rf /tmp/downloaded_packages/
 
+# Additional graphics
+RUN install2.r --error \ 
+    # Plotly's R graphing library makes interactive, publication-quality graphs online. line plots, scatter plots, area
+    #  charts, bar charts, error bars, box plots, histograms, heatmaps, subplots, multiple-axes, and 3D (WebGL based)
+    #  charts
+    plotly \
+    # provides an interface between R and the Google. Charts API. Google Charts
+    # offer interactive charts which can be embedded into web pages. The best known
+    # of these charts is probably the Motion Chart
+     googleVis \
+    && rm -rf /tmp/downloaded_packages/
+
+RUN installGithub.r \
+   # Dashboard themes
+   nik01010/dashboardthemes \
+   && rm -rf /tmp/downloaded_packages/
+
+# RUN install2.r --error \ 
+#     # Dashboard themes
+#     dashboardthemes \
+#     && rm -rf /tmp/downloaded_packages/
+
+
 #RUN installGithub.r \
 #    && rm -rf /tmp/downloaded_packages/
