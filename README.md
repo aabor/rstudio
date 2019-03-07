@@ -120,7 +120,25 @@ Generate and serve an HTTP API from R functions
 `logging` # usufull for concurrent applications
 
 # rstudio-finance docker image
-[`aabor/rstudio-finance`](https://cloud.docker.com/repository/docker/aabor/rstudio-finance) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting: `quantmod`, `qrmtools`, `rugarch` among others. For precise and full description of installed packages in `aabor/rstudio-finance`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-finance/Dockerfile)
+[`aabor/rstudio-finance`](https://cloud.docker.com/repository/docker/aabor/rstudio-finance) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R financial libraries for financial trading, forcasting.
+
+## popular financial time series packages and time series models
+
+`quantmod`, `qrmtools`, `rugarch`. 
+
+## highfrequency financial data analysis
+
+Fourier integrals, Kalman filter, jump detection.
+
+## Bayesian Inference for time series
+
+`BEST`, `bayesm`, `bsts`, `evdbayes`, `bsamGP` ecc.
+
+## Monte Carlo simulation
+
+`MCMCpack`, `mcmcse`, `sgmcmc` ecc.
+
+For precise and full description of installed packages in `aabor/rstudio-finance`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-finance/Dockerfile)
 
 # rstudio-text docker image
 [`aabor/rstudio-text`](https://cloud.docker.com/repository/docker/aabor/rstudio-text) docker image is based on [aabor/rstudio](https://github.com/aabor/rstudio) and adds R libraries for text processing: `qdap`, `topicmodels`, `textmineR`, `tesseract`, `stringdist` among others. For precise and full description of installed packages in `aabor/rstudio-text`, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio-text/Dockerfile).
