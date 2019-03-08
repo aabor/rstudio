@@ -154,8 +154,18 @@ RUN install2.r --error \
     XLConnect \
     && rm -rf /tmp/downloaded_packages/
 
+# connection to Word
 RUN install2.r --error \ 
+    # Manipulation of Microsoft Word and PowerPoint Documents
+    officer \
+    # Create pretty tables for 'HTML', 'Microsoft Word' and 'Microsoft PowerPoint' documents. Functions are provided to let users create tables, modify and format their content. It extends package 'officer' that does not contain any feature for customized tabular reporting and can be used within R markdown documents
+    flextable \
+    # Serves for rendering MS Word documents with R inline code and inserting tables and plots.
+    WordR \
     && rm -rf /tmp/downloaded_packages/
+
+# RUN install2.r --error \ 
+#     && rm -rf /tmp/downloaded_packages/
 
 # Add shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add

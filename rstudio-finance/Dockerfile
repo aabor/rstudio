@@ -14,14 +14,6 @@ RUN install2.r --error \
     qrmdata \
     && rm -rf /tmp/downloaded_packages/
 
-RUN install2.r --error \ 
-    # Tools for Quantitative Risk Management
-    qrmtools \
-    #ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit, forecast, simulation,
-    #inference and plotting 
-    rugarch \
-    && rm -rf /tmp/downloaded_packages/
-
 # QuantLib installation
 RUN  apt-get update && apt-get install -y \
     # QuantLib Library aims to provide a comprehensive software framework for quantitative finance. The goal is to
@@ -31,7 +23,27 @@ RUN  apt-get update && apt-get install -y \
     libquantlib0-dev \
     libboost-all-dev \
     quantlib-python \
-    quantlib-examples
+    quantlib-examples \
+    # GSL - GNU Scientific Library
+    libgsl2 \
+    libgsl0-dev 
+
+RUN install2.r --error \ 
+    # Accompanying package to the book Quantitative Risk Management: Concepts, Techniques and Tools by Alexander J.
+    # McNeil, Rüdiger Frey, and Paul Embrechts
+    QRM \
+    # Functions to calculate: moments, Pearson's kurtosis, Geary's kurtosis and skewness; tests related to them
+    # (Anscombe-Glynn, D'Agostino, Bonett-Seier)
+    moments \
+    #ARFIMA, in-mean, external regressors and various GARCH flavors, with methods for fit, forecast, simulation,
+    #inference and plotting 
+    rugarch \
+    # Alternative Time Series Analysis: Augmented Dickey-Fuller Test, Kwiatkowski-Phillips-Schmidt-Shin Test, Phillips-Perron Test, Trend Test
+    aTSA \
+    # Tools for Quantitative Risk Management
+    qrmtools \
+    && rm -rf /tmp/downloaded_packages/
+
 # RUN install2.r --error \ 
 #     # R Interface to the 'QuantLib' Library
 #     RQuantLib \
