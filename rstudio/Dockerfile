@@ -101,6 +101,8 @@ RUN install2.r --error \
     # consisting of calculating descriptive statistics, drawing graphical summaries and reporting the results
     # %overlaps% determines if two date ranges overlap
     DescTools \
+    # parses and converts LaTeX math formulas to R’s plotmath expressions.
+    latex2exp \
     && rm -rf /tmp/downloaded_packages/
 
 # RESTful API
