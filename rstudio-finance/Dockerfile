@@ -52,6 +52,9 @@ RUN install2.r --error \
 RUN install2.r --error \ 
     # Alpha Vantage has free historical financial information. All you need to do is get a free API key
     alphavantager \
+    #  The factualR package is a thin wrapper around the Factual.com API, to make it even easier for people working with
+    #  R to explore Factual.com data sets
+    factualR \
     && rm -rf /tmp/downloaded_packages/
 
 # highfrequency financial data analysis
@@ -116,18 +119,8 @@ RUN install2.r --error \
     bsamGP \
     && rm -rf /tmp/downloaded_packages/
 
-# Prerequisitives to Diffusion processes
-RUN  apt-get update && apt-get install -y \
-    # functions implementing a new graphics device suitable for visualisation of GNU R objects in three dimensions using
-    # the OpenGL libraries
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    freeglut3-dev
-
 # Diffusion processes
 RUN install2.r --error \ 
-    # 3D Visualization Using OpenGL
-    rgl \
     # Tools for performing inference and analysis on a class of quadratic diffusion processes for both scalar and
     # bivariate diffusion systems. For scalar diffusions, a module is provided for solving first passage time problems
     # for both time-homogeneous and time-inhomogeneous GQDs

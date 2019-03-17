@@ -20,6 +20,14 @@ RUN apt-get update && apt-get install -y \
   gnupg2 \
   && apt-get clean
 
+# Prerequisitives to OpenGL
+RUN  apt-get update && apt-get install -y \
+    # functions implementing a new graphics device suitable for visualisation of GNU R objects in three dimensions using
+    # the OpenGL libraries
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    freeglut3-dev
+
 # System utilities
 RUN install2.r --error \
   #A cross-platform interface to file system operations, built on top of the 'libuv' C library
@@ -28,6 +36,8 @@ RUN install2.r --error \
   xfun \
   # General Network (HTTP/FTP/...) Client Interface for R
   RCurl \
+  # 3D Visualization Using OpenGL
+  rgl \
   && rm -rf /tmp/downloaded_packages/
 
 # Java 8
@@ -49,7 +59,10 @@ RUN apt-get update \
     libv8-dev \
     && apt-get clean
 RUN install2.r --error \ 
+    # Low-level interface to Java VM
     rJava \
+    # conversion to and from data in Javascript object notation (JSON) format
+    RJSONIO \
     && rm -rf /tmp/downloaded_packages/
 
 # tidyverse packages for time series
@@ -112,6 +125,9 @@ RUN install2.r --error \
   # Multiple Precision Arithmetic (big integers and rationals, prime number tests, matrix computation), "arithmetic
   # without limitations" using the C library GMP (GNU Multiple Precision Arithmetic)
   gmp \
+  # Public Key Infrastucture for R Based on the X.509 Standard. PKI functions such as verifying certificates, RSA
+  # encription and signing which can be used to build PKI infrastructure and perform cryptographic tasks.
+  PKI \
   # Multiple Precision Floating-Point Reliable
   Rmpfr \
   # PMCMRplus: Calculate Pairwise Multiple Comparisons of Mean Rank Sums Extended

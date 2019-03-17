@@ -18,7 +18,7 @@ services:
       - "8787:8787"
       - "3838:3838"
     environment:
-      - TZ="Europe/Kiev"
+      - TZ="EEST"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
@@ -46,7 +46,7 @@ services:
       - "8788:8787"
       - "3839:3838"
     environment:
-      - TZ="Europe/Kiev"
+      - TZ="EEST"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
@@ -71,7 +71,7 @@ services:
       - "8789:8787"
       - "3840:3838"
     environment:
-      - TZ="Europe/Kiev"
+      - TZ="EEST"
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
