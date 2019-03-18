@@ -226,6 +226,8 @@ RUN install2.r --error \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
+    # R Interface to the Yacas Computer Algebra System
+    Ryacas \
     #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines,
     #shortest path computation, bagged clustering, naive Bayes classifier
     e1071 \

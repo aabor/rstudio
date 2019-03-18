@@ -31,7 +31,14 @@ Bringing financial analysis to the 'tidyverse'
 
 `tidyquant`
 
-## Statistical packages
+## Working with png and jpeg files
+
+## Math and statistical packages
+
+R Interface to the Yacas Computer Algebra System
+
+`Ryacas`
+
 Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier
 
 `e1071`
