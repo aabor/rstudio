@@ -30,6 +30,8 @@ RUN install2.r --error \
      # set of functions for extending dendrogram objects in R, letting you visualize and compare trees of hierarchical
      # clusterings
      dendextend \
+     # stopword lists
+     stopwords \
      && rm -rf /tmp/downloaded_packages/
 
 # text mining
@@ -57,8 +59,6 @@ RUN install2.r --error \
     # wrapper for several topic models that take similarly-formatted input and give similarly-formatted output Has
     # additional functionality for analyzing and diagnostics for topic models.
     textmineR \
-    # Automatic Text Classification via Supervised Learning
-    RTextTools \
     && rm -rf /tmp/downloaded_packages/
 
 # image processing

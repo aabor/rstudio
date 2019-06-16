@@ -1,6 +1,6 @@
 # aabor/rstudio
 # configured for automatic build
-FROM rocker/tidyverse:3.5.2
+FROM rocker/tidyverse:3.5.3
 
 LABEL maintainer="A. Borochkin"
 
@@ -30,7 +30,7 @@ RUN  apt-get update && apt-get install -y \
 
 # System utilities
 RUN install2.r --error \
-  #A cross-platform interface to file system operations, built on top of the 'libuv' C library
+  # A cross-platform interface to file system operations, built on top of the 'libuv' C library
   fs \
   #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
   xfun \
@@ -38,6 +38,7 @@ RUN install2.r --error \
   RCurl \
   # 3D Visualization Using OpenGL
   rgl \
+  doParallel \
   && rm -rf /tmp/downloaded_packages/
 
 # Java 8
@@ -82,6 +83,7 @@ RUN apt-get update && apt-get install -y libfreetype6-dev \
   libxt-dev \
   libcairo2-dev \
   && apt-get clean
+
 # 'TrueType', 'OpenType', Type 1, web fonts, etc.
 # in R graphs
 RUN install2.r --error \
@@ -226,8 +228,6 @@ RUN install2.r --error \
     && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
-    # R Interface to the Yacas Computer Algebra System
-    Ryacas \
     #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines,
     #shortest path computation, bagged clustering, naive Bayes classifier
     e1071 \
@@ -256,3 +256,38 @@ RUN install2.r --error \
     # (multi-state) curves, Cox models, and parametric accelerated failure time models.
     survival \
     && rm -rf /tmp/downloaded_packages/
+
+# Tidyverse like packages
+RUN install2.r --error \
+  # Provides a general-purpose tool for dynamic report generation in R using Literate Programming techniques
+  knitr \
+  # Construct Complex Table with 'kable' and Pipe Syntax
+  kableExtra \
+  # Computes and displays complex tables of summary statistics. Output may be in LaTeX, HTML, plain text, or an R matrix for further processing
+  tables \
+  # Flexibly restructure and aggregate data using just two functions: melt and 'dcast'
+  reshape2 \
+  # Methods to Convert R Data to YAML and Back
+  yaml \
+  && rm -rf /tmp/downloaded_packages/
+
+# Latex support
+RUN  apt-get update && apt-get install -y \
+  texlive-full \
+  && apt-get clean
+
+# Database support
+RUN install2.r --error \ 
+    # Legacy 'DBI' interface to 'MySQL' / 'MariaDB' based on old code ported from S-PLUS
+    RMySQL \
+    # A modern 'MySQL' client based on 'Rcpp'
+    RMariaDB \
+    # gWidgets API for Building Toolkit-Independent, Interactive GUIs
+    gWidgets \
+    # Provides a graphical user interface to connect with databases that use MySQL
+    dbConnect \
+    # defines a common interface between the R and database management systems (DBMS)
+    DBI \
+    && rm -rf /tmp/downloaded_packages/
+
+
