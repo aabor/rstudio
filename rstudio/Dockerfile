@@ -105,6 +105,14 @@ RUN install2.r --error \
     DescTools \
     # parses and converts LaTeX math formulas to R’s plotmath expressions.
     latex2exp \
+    # wesanderson color palette for R
+    wesanderson \
+    # Convert Plot to 'grob' or 'ggplot' Object.
+    ggplotify \
+    # makes it easy to combine multiple 'ggplot2' plots into one and label them with letters, provides a streamlined and clean theme that is used in the Wilke lab
+    cowplot \
+    # Visualization techniques, data sets, summary and inference procedures aimed particularly at categorical data. Special emphasis is given to highly extensible grid graphics.
+    vcd \
     && rm -rf /tmp/downloaded_packages/
 
 # RESTful API
