@@ -170,6 +170,8 @@ RUN install2.r --error \
   # Benchmark your CPU and compare against other CPUs. Also provides functions for obtaining system specifications, such
   # as RAM, CPU type, and R version.
   benchmarkme \
+  # Schedule R scripts/processes with the cron scheduler. This allows R users working on Unix/Linux to automate R processes on specific timepoints from R itself.
+  cronR \
   && rm -rf /tmp/downloaded_packages/
 
 # connection to Excel
@@ -296,6 +298,8 @@ RUN install2.r --error \
     dbConnect \
     # defines a common interface between the R and database management systems (DBMS)
     DBI \
+    # provide a common API for access to SQL 1 -based database management systems (DBMSs) such as MySQL 2 , PostgreSQL, Microsoft Access and SQL Server, DB2, Oracle and SQLite
+    RODBC \
     && rm -rf /tmp/downloaded_packages/
 
 
