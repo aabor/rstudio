@@ -35,6 +35,8 @@ pipeline {
                 '''
                 echo "starting docker containers"
                 sh'''
+                    docker network create selenium-hub
+                    docker network create front-end
                     docker-compose up -d --remove-orphans
                 '''
                 mail    body: 'containers rstudio, rstudio-finance, rstudio-text started',
