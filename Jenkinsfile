@@ -8,7 +8,6 @@ pipeline {
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
-                echo 'Building and tagging..'
                 sh '''
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
                     docker-compose build
@@ -19,7 +18,7 @@ pipeline {
                     # recreate networks after system pruning
                     docker network create selenium-hub || true
                     docker network create front-end || true
-                '''
+                ''', label 'Building and tagging..'
                 echo 'Pushing images..'
                 sh '''
                     echo 'login to docker'
