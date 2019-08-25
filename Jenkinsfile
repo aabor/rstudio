@@ -8,7 +8,7 @@ pipeline {
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
-                sh '''
+                labelledShell label: 'Building and tagging docker images...', script: '''
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
                     docker-compose build
                     docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
@@ -18,9 +18,8 @@ pipeline {
                     # recreate networks after system pruning
                     docker network create selenium-hub || true
                     docker network create front-end || true
-                ''', label 'Building and tagging..'
-                echo 'Pushing images..'
-                sh '''
+                '''
+                labelledShell label: 'Pushing images to docker registry...', script: '''
                     echo 'login to docker'
                     docker login -u $DOCKER_CREDS_USR  -p $DOCKER_CREDS_PSW
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
@@ -35,14 +34,9 @@ pipeline {
                     docker push aabor/rstudio-text:$GIT_VERSION
                     docker push aabor/rstudio-text:latest
                 '''
-                echo "starting docker containers"
-                sh'''
+                labelledShell label: 'Starting docker containers...', script: '''
                     docker-compose up -d --remove-orphans
                 '''
-                mail    body: 'containers rstudio, rstudio-finance, rstudio-text started',
-                        from: 'aaborochkin@gmail.com',
-                        subject: 'rocker successfully rolled out',
-                        to: 'aaborochkin@gmail.com'  
             }
             post {
                 always{
