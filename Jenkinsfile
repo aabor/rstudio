@@ -17,8 +17,8 @@ pipeline {
                     docker tag $USER/rstudio-text:latest $USER/rstudio-text:$GIT_VERSION
                     docker system prune -f # remove orphan containers, volumes, networks and images
                     # recreate networks after system pruning
-                    docker network create selenium-hub
-                    docker network create front-end
+                    docker network create selenium-hub || true
+                    docker network create front-end || true
                 '''
                 echo 'Pushing images..'
                 sh '''
