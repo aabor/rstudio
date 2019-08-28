@@ -24,7 +24,8 @@ services:
     restart: "on-failure:30"
     networks: 
       - selenium-hub
-      - front-end
+      - front-en
+      - host
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.
@@ -53,6 +54,7 @@ services:
     networks: 
       - selenium-hub
       - front-end
+      - host
   rstudio-text: 
     image: aabor/rstudio-text
     build: rstudio-text/.
@@ -78,6 +80,7 @@ services:
     networks: 
       - selenium-hub
       - front-end
+      - host
 networks:
   selenium-hub:
     external: true
