@@ -18,6 +18,7 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+      - /home/$USER:/etc/mysql/conf.d
     networks: 
       - front-end 
   rstudio: 
