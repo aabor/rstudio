@@ -1,5 +1,23 @@
 version: '3.5'
 services:
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'edu'
+      MYSQL_USER: $USER
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks: 
+      - front-end 
   rstudio: 
     image: aabor/rstudio
     build: rstudio/.
@@ -25,7 +43,6 @@ services:
     networks: 
       - selenium-hub
       - front-end 
-      - host
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.
@@ -54,7 +71,6 @@ services:
     networks: 
       - selenium-hub
       - front-end
-      - host
   rstudio-text: 
     image: aabor/rstudio-text
     build: rstudio-text/.
@@ -80,9 +96,10 @@ services:
     networks: 
       - selenium-hub
       - front-end
-      - host
 networks:
   selenium-hub:
     external: true
   front-end:
     external: true
+volumes:
+  my-db:
