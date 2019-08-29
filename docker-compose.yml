@@ -17,6 +17,7 @@ services:
     volumes:
       - my-db:/var/lib/mysql
       - /home/$USER:/etc/mysql/conf.d
+    command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
     networks: 
       - front-end 
   rstudio: 
