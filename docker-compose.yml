@@ -2,16 +2,21 @@ version: '3.5'
 services:
 services:
   db:
-    image: mariadb/server:10.4
+    image: mysql:8.0
     restart: always
     environment:
-      - MARIADB_ALLOW_EMPTY_PASSWORD="yes"
-      - MARIADB_DATABASE="edu"
+      MYSQL_DATABASE: 'edu'
+      MYSQL_USER: $USER
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      #MYSQL_ROOT_PASSWORD: 'password'
     ports:
       - '3306:3306'
+    expose:
+      - '3306'
     volumes:
-      - /home/$USER/mysql:/var/lib/mysql
-      #- /home/$USER:/etc/mysql/conf.d
+      - my-db:/var/lib/mysql
+      - /home/$USER:/etc/mysql/conf.d
     networks: 
       - front-end 
   rstudio: 
