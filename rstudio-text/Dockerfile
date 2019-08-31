@@ -129,6 +129,27 @@ RUN install2.r --error \
 # accounts with 2-Step Verification enabled. Such accounts require an application-specific password for less secure apps acces
 RUN R -e "devtools::install_github('rpremraj/mailR')"
 
+# Networks and processes
+RUN install2.r --error \ 
+    # Comprehensive Business Process Analysis toolkit: event logs, 'Petri Net' objects, visualization of process maps
+    bupaR \
+    # tidy interfaces to a lot of common graph algorithms
+    tidygraph \
+    #  ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer
+    ggraph \
+    # interactive visualization of networks
+    visNetwork \
+    # Event dataset repository including both real-life and artificial event logs    
+    eventdataR \
+    # Exploratory and descriptive analysis of event based data. Provides methods for describing and selecting process data, and for preparing event log data for process mining
+    edeaR \
+    # Visualize of process maps based on event logs, in the form of directed graphs
+    processmapR \
+    # Functions for constructing dashboards for business process monitoring
+    processmonitR \
+    && rm -rf /tmp/downloaded_packages/
+
+
 # RUN installGithub.r \
 
 #     && rm -rf /tmp/downloaded_packages/
