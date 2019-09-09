@@ -92,6 +92,8 @@ RUN install2.r --error \
 
 #Additional ggplot packages
 RUN install2.r --error \
+    # makes it easy to combine multiple 'ggplot2' plots into one and label them with letters, provides a streamlined and clean theme that is used in the Wilke lab
+    cowplot \
     # Based Publication Ready Plots
     ggpubr \
     # Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from
@@ -109,10 +111,10 @@ RUN install2.r --error \
     wesanderson \
     # Convert Plot to 'grob' or 'ggplot' Object.
     ggplotify \
-    # makes it easy to combine multiple 'ggplot2' plots into one and label them with letters, provides a streamlined and clean theme that is used in the Wilke lab
-    cowplot \
     # Visualization techniques, data sets, summary and inference procedures aimed particularly at categorical data. Special emphasis is given to highly extensible grid graphics.
     vcd \
+    # tabulate-and-report functions that approximate popular features of SPSS and Microsoft Excel
+    janitor \
     && rm -rf /tmp/downloaded_packages/
 
 # RESTful API
