@@ -8,7 +8,7 @@ pipeline {
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
             }            
             steps {
-                creatingNetworks label: 'Creating networks if needed', script: '''
+                labelledShell label: 'Creating networks if needed', script: '''
                     docker network create front-end || true
                     docker network create selenium-hub || true
                 '''
