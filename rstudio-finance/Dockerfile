@@ -105,8 +105,6 @@ RUN install2.r --error \
     bayesm \
     # contains R functions to perform Bayesian inference for survival regression models with flexible error and random effects distributions.
     bayesSurv \
-    # contains R functions for Bayesian nonparametric and semiparametric models. DPpackage currently includes semiparametric models for density estimation, ROC curve analysis, interval censored data, binary regression models, generalized linear mixed models, and IRT type models. 
-    DPpackage \
     # performs Bayesian inference on the (discrete) power spectrum of time series.
     bspec \
     # a package for time series regression using dynamic linear models using MCMC. 
