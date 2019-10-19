@@ -2,6 +2,7 @@
 
 [`aabor/rstudio`](https://cloud.docker.com/u/aabor/repository/docker/aabor/rstudio) docker image is based on official [`rocker/tidyverse`](https://hub.docker.com/r/rocker/tidyverse/) image which contains RStudio and basic `tidyverse` packages. For precise and full description of installed packages in `aabor/rstudio` image, please, refer to corresponding [`Dockerfile`](https://github.com/aabor/rstudio/blob/master/rstudio/Dockerfile).
 
+
 `openssh` enabled.
 
 Different Fonts 'TrueType', 'OpenType', Type 1, web fonts, etc.
