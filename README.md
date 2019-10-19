@@ -49,7 +49,7 @@ Gaussian Mixture Modelling for Model-Based Clustering, Classification, and Densi
 `mclust`
 
 
-Companion to Applied Regression
+Companion to Applied Regression 
 
 `car` 
 
