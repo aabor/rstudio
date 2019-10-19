@@ -166,3 +166,9 @@ Creates containers:
 # Webhooks
 
 Build is triggered in Jenkins via Webhook
+
+Generic Webhook Trigger > Trigger builds remotely (e.g., from scripts) > Authentication Token
+
+Use the following URL to trigger build remotely: JENKINS_URL/job/rstudio/build?token=TOKEN_NAME or /buildWithParameters?token=TOKEN_NAME
+Optionally append &cause=Cause+Text to provide text that will be included in the recorded build cause
+
