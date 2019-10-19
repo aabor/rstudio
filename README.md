@@ -162,3 +162,5 @@ Creates containers:
 `rstudio-finance`
 
 `rstudio-text`
+
+# Build is triggered in Jenkins via Webhook
