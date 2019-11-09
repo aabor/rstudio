@@ -49,7 +49,7 @@ services:
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
     depends_on:
-      - selenium
+      - chrome
     networks: 
       - selenium-hub
       - front-end 
@@ -79,7 +79,7 @@ services:
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
     depends_on:
-      - selenium
+      - chrome
     networks: 
       - selenium-hub
       - front-end
@@ -109,7 +109,7 @@ services:
       - selenium-hub
       - front-end
     depends_on:
-      - selenium
+      - chrome
   nbdatascience: 
     image: aabor/nbdatascience
     build: nbdatascience/.
