@@ -1,17 +1,30 @@
 version: '3.5'
 services:
-  selenium:
-    container_name: selenium
-    image: selenium/standalone-firefox:3.141.59
+  selenium-hub:
+    image: selenium/hub:3.141.59-xenon
     environment:
-      - TZ="EEST"
-    ports:
-      - "4444:4444"
-    volumes:
-      - /dev/shm:/dev/shm
-      - /home/$USER/Downloads/Selenium:/home/seluser/Downloads
+      - GRID_MAX_SESSION=15
+      - GRID_TIMEOUT=180000
+      - GRID_BROWSER_TIMEOUT=180000      
     networks: 
       - selenium-hub
+  chrome:
+    image: selenium/node-chrome:3.141.59-xenon
+    shm_size: 512MB
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - NODE_MAX_INSTANCES=5
+      - NODE_MAX_SESSION=6
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+    volumes:
+      - /home/$USER/Downloads/Selenium:/home/seluser/Downloads
+    networks: 
+      - selenium-hub      
     restart: always
   rstudio: 
     image: aabor/rstudio
@@ -97,6 +110,31 @@ services:
       - front-end
     depends_on:
       - selenium
+  nbdatascience: 
+    image: aabor/nbdatascience
+    build: nbdatascience/.
+    volumes:
+      - /home/$USER/Documents:/home/jovyan/Documents
+      - /home/$USER/Documents/Trading/fh:/home/jovyan/work/R/fh/data
+      - /home/$USER/Documents/Trading/news-csv-arch:/home/jovyan/work/R/fh/data/news-csv-arch
+      - /home/$USER/projects:/home/jovyan/work
+      - /home/$USER/.jupyter:/home/jovyan/.jupyter
+      #- /home/$USER/.kaggle:/home/jovyan/.kaggle
+      - /home/$USER/.ssh:/home/jovyan/.ssh/  
+      - /home/$USER/.secrets:/home/jovyan/.secrets/  
+      - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
+      - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
+    ports:
+      - 10000:8888
+    environment:
+      - TZ="EEST"
+      - WERKZEUG_DEBUG_PIN=off
+    restart: always
+    depends_on:
+      - chrome
+    networks: 
+      - selenium-hub
+      - front-end      
 networks:
   selenium-hub:
     external: true
