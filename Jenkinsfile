@@ -9,12 +9,12 @@ pipeline {
             }            
             steps {
                 labelledShell label: 'Creating networks if needed', script: '''
+                    docker-compose down
                     docker network create front-end || true
                     docker network create selenium-hub || true
                 '''
                 labelledShell label: 'Building and tagging docker images...', script: '''
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
-                    docker-compose down
                     docker-compose build
                     docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
                     docker tag $USER/rstudio-finance:latest $USER/rstudio-finance:$GIT_VERSION
