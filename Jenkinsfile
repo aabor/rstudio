@@ -9,6 +9,7 @@ pipeline {
             }            
             steps {
                 labelledShell label: 'Creating networks if needed', script: '''
+                    docker-compose down
                     docker network create front-end || true
                     docker network create selenium-hub || true
                 '''
