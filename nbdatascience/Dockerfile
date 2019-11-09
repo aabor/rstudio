@@ -32,14 +32,11 @@ USER jovyan
 
 RUN conda install -y nodejs 
 
-RUN conda install -c clinicalgraphics selenium-chromedriver
-RUN conda install -c conda-forge selenium tabulate
-#RUN conda install -c conda-forge tabulate
-
 RUN jupyter labextension install -y @jupyterlab/toc
 RUN jupyter labextension install -y @jupyterlab/git
 RUN pip install jupyterlab-git 
 RUN jupyter serverextension enable --py jupyterlab_git
+RUN pip install chromedriver-binary
 RUN pip install lxml xmlrunner Flask
 RUN pip install pause humanfriendly
 RUN pip install pytest ipytest  
