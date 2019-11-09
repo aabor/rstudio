@@ -2,14 +2,14 @@ version: '3'
 services:
   selenium:
     container_name: selenium
-    image: selenium/standalone-firefox:3.141.59-bismuth
+    image: selenium/standalone-firefox:3.141.59
     environment:
-      - TZ="GMT"
+      - TZ="Europe/Kiev"
     ports:
-      - "4443:4444"
+      - "4444:4444"
     volumes:
       - /dev/shm:/dev/shm
-      - $SELENIUM_PATH:/home/seluser/Downloads
+      - /home/$USER/Downloads/Selenium:/home/seluser/Downloads
     networks: 
       - backend
     restart: always

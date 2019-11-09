@@ -1,5 +1,18 @@
 version: '3.5'
 services:
+  selenium:
+    container_name: selenium
+    image: selenium/standalone-firefox:3.141.59
+    environment:
+      - TZ="EEST"
+    ports:
+      - "4444:4444"
+    volumes:
+      - /dev/shm:/dev/shm
+      - /home/$USER/Downloads/Selenium:/home/seluser/Downloads
+    networks: 
+      - selenium-hub
+    restart: always
   rstudio: 
     image: aabor/rstudio
     build: rstudio/.
@@ -22,6 +35,8 @@ services:
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
+    depends_on:
+      - selenium
     networks: 
       - selenium-hub
       - front-end 
@@ -50,6 +65,8 @@ services:
       - USER=rstudio
       - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
+    depends_on:
+      - selenium
     networks: 
       - selenium-hub
       - front-end
@@ -78,6 +95,8 @@ services:
     networks: 
       - selenium-hub
       - front-end
+    depends_on:
+      - selenium
 networks:
   selenium-hub:
     external: true
