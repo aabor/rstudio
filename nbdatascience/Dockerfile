@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
 
 USER jovyan
 
-RUN conda install -y nodejs 
+RUN jupyter lab build
 
 RUN jupyter labextension install -y @jupyterlab/toc
 RUN jupyter labextension install -y @jupyterlab/git
