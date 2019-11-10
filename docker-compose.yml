@@ -126,12 +126,10 @@ services:
       - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
       - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
     ports:
-      - 10000:8888
+      - 8888:8888
     environment:
       - TZ="EEST"
       - WERKZEUG_DEBUG_PIN=off
-      - USER=jovyan
-      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
     depends_on:
       - chrome

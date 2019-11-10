@@ -1,2 +1,4 @@
 .rstudio/
 .Rhistory
+.vagrant/*
+*.log
