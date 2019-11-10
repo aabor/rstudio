@@ -129,6 +129,8 @@ services:
     environment:
       - TZ="EEST"
       - WERKZEUG_DEBUG_PIN=off
+      - USER=jovyan
+      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
     restart: always
     depends_on:
       - chrome
