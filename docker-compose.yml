@@ -110,32 +110,32 @@ services:
       - front-end
     depends_on:
       - chrome
-  nbdatascience: 
-    image: aabor/nbdatascience
-    build: nbdatascience/.
-    command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
-    volumes:
-      - /home/$USER/Documents:/home/jovyan/Documents
-      - /home/$USER/Documents/Trading/fh:/home/jovyan/work/R/fh/data
-      - /home/$USER/Documents/Trading/news-csv-arch:/home/jovyan/work/R/fh/data/news-csv-arch
-      - /home/$USER/projects:/home/jovyan/work
-      - /home/$USER/.jupyter:/home/jovyan/.jupyter
-      #- /home/$USER/.kaggle:/home/jovyan/.kaggle
-      - /home/$USER/.ssh:/home/jovyan/.ssh/  
-      - /home/$USER/.secrets:/home/jovyan/.secrets/  
-      - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
-      - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
-    ports:
-      - 8888:8888
-    environment:
-      - TZ="EEST"
-      - WERKZEUG_DEBUG_PIN=off
-    restart: always
-    depends_on:
-      - chrome
-    networks: 
-      - selenium-hub
-      - front-end      
+#   nbdatascience: 
+#     image: aabor/nbdatascience
+#     build: nbdatascience/.
+#     command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
+#     volumes:
+#       - /home/$USER/Documents:/home/jovyan/Documents
+#       - /home/$USER/Documents/Trading/fh:/home/jovyan/work/R/fh/data
+#       - /home/$USER/Documents/Trading/news-csv-arch:/home/jovyan/work/R/fh/data/news-csv-arch
+#       - /home/$USER/projects:/home/jovyan/work
+#       - /home/$USER/.jupyter:/home/jovyan/.jupyter
+#       #- /home/$USER/.kaggle:/home/jovyan/.kaggle
+#       - /home/$USER/.ssh:/home/jovyan/.ssh/  
+#       - /home/$USER/.secrets:/home/jovyan/.secrets/  
+#       - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
+#       - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
+#     ports:
+#       - 8888:8888
+#     environment:
+#       - TZ="EEST"
+#       - WERKZEUG_DEBUG_PIN=off
+#     restart: always
+#     depends_on:
+#       - chrome
+#     networks: 
+#       - selenium-hub
+#       - front-end      
 networks:
   selenium-hub:
     external: true
