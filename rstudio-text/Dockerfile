@@ -42,6 +42,8 @@ RUN install2.r --error \
     tm \
     # Natural Language Processing
     wordcloud \
+    # A Word Cloud Geom for 'ggplot2'
+    ggwordcloud \
     # Porter's word stemming algorithm. 
     SnowballC \
     # helps split text into tokens, supporting shingled n-grams, skip n-grams, words, word stems, sentences, paragraphs,

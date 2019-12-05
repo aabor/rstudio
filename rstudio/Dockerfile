@@ -59,12 +59,47 @@ RUN apt-get update \
     ## for V8-based javascript wrappers
     libv8-dev \
     && apt-get clean
+
+# System utilities
+RUN install2.r --error \
+  doParallel \
+  # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger,
+  # level based filtering, space handling in messages and custom formatting.
+  logging \
+  #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R
+  #documentation around your functions.
+  plumber \
+  # Retrieve data from RSS/Atom feeds
+  feedeR \
+  # JUnit tests
+  testthat \
+  # Low-Level R to Java Interface
+  rJava \  
+  # conversion to and from data in Javascript object notation (JSON) format
+  RJSONIO \
+  # R functions implementing a standard Unit Testing framework, with additional code inspection and report generation tools
+  RUnit \   
+  && rm -rf /tmp/downloaded_packages/
+
+# A Utility to Send Emails from R, Java dependent
+# https://medium.com/@randerson112358/send-email-using-r-program-1b094208cf2f
+# to fix error Sending the email to the following server failed : smtp.gmail.com:465
+# accounts with 2-Step Verification enabled. Such accounts require an application-specific password for less secure apps acces
+RUN R -e "devtools::install_github('rpremraj/mailR')"
+
+# Different file formats support
 RUN install2.r --error \ 
-    # Low-level interface to Java VM
-    rJava \
-    # conversion to and from data in Javascript object notation (JSON) format
-    RJSONIO \
-    && rm -rf /tmp/downloaded_packages/
+    # functions to stream, validate, and prettify JSON data
+    jsonlite \
+    # archivator
+    zip \
+    # easy and simple way to read, write and display bitmap images stored in the JPEG format
+    png \
+    # easy and simple way to read, write and display bitmap images stored in the PNG format
+    jpeg \
+    # Methods to Convert R Data to YAML and Back
+    yaml \
+    && rm -rf /tmp/downloaded_packages/    
 
 # tidyverse packages for time series
 RUN install2.r --error \
@@ -115,18 +150,6 @@ RUN install2.r --error \
     vcd \
     # tabulate-and-report functions that approximate popular features of SPSS and Microsoft Excel
     janitor \
-    && rm -rf /tmp/downloaded_packages/
-
-# RESTful API
-RUN install2.r --error \ 
-    # An interface to the Gmail RESTful API. Allows access to your Gmail messages, threads, drafts and labels.
-    gmailr \
-    #Gives the ability to automatically generate and serve an HTTP API from R functions using the annotations in the R
-    #documentation around your functions.
-    plumber \
-    # Pure R implementation of the ubiquitous log4j package. It offers hierarchic loggers, multiple handlers per logger,
-    # level based filtering, space handling in messages and custom formatting.
-    logging \
     && rm -rf /tmp/downloaded_packages/
 
 # Dependencies for Rmpfr, gmp
@@ -230,14 +253,6 @@ RUN install2.r --error \
   && rm -rf /tmp/downloaded_packages/
 
 
-RUN install2.r --error \ 
-    # easy and simple way to read, write and display bitmap images stored in the JPEG format
-    png \
-    # easy and simple way to read, write and display bitmap images stored in the PNG format
-    jpeg \
-    # Retrieve data from RSS/Atom feeds
-    feedeR \
-    && rm -rf /tmp/downloaded_packages/
 
 RUN install2.r --error \ 
     #Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines,
