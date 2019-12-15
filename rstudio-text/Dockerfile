@@ -131,22 +131,46 @@ RUN install2.r --error \
 # accounts with 2-Step Verification enabled. Such accounts require an application-specific password for less secure apps acces
 RUN R -e "devtools::install_github('rpremraj/mailR')"
 
-# Networks and processes
+# Graph visualisation
 RUN install2.r --error \ 
-    # Comprehensive Business Process Analysis toolkit: event logs, 'Petri Net' objects, visualization of process maps
-    bupaR \
+    # Visualize the graphs and take advantage of any aesthetic properties assigned to nodes and edges
+    DiagrammeR \
     # tidy interfaces to a lot of common graph algorithms
     tidygraph \
     #  ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer
     ggraph \
     # interactive visualization of networks
     visNetwork \
-    # Event dataset repository including both real-life and artificial event logs    
-    eventdataR \
+    && rm -rf /tmp/downloaded_packages/
+
+# Python interface and Process Analysis libraries
+RUN install2.r --error \ 
+    reticulate \
+    # Interface to 'PM4py' <http://pm4py.org>, a process mining library in 'Python'
+    pm4py \
+    && rm -rf /tmp/downloaded_packages/
+
+# Networks and processes
+RUN install2.r --error \ 
+    # Comprehensive Business Process Analysis toolkit: event logs, 'Petri Net' objects, visualization of process maps
+    bupaR \
+    # Read and write XES Files to create event log objects used by the 'bupaR' framework.
+    xesreadR \
     # Exploratory and descriptive analysis of event based data. Provides methods for describing and selecting process data, and for preparing event log data for process mining
     edeaR \
+    # Event dataset repository including both real-life and artificial event logs    
+    eventdataR \
+    # Rule-Based Conformance Checking of Business Process Event Data
+    processcheckR \
+    # Building, Visualizing, Exporting and Replaying Petri Nets
+    petrinetR \
+    # Process discovery with variants of the Heuristics Miner algorithm
+    heuristicsmineR \
+
     # Visualize of process maps based on event logs, in the form of directed graphs
     processmapR \
+    # Provides animated process maps based on the 'procesmapR' package
+    processanimateR \
     # Functions for constructing dashboards for business process monitoring
     processmonitR \
     && rm -rf /tmp/downloaded_packages/
