@@ -9,10 +9,12 @@ RUN  apt-get update && apt-get install -y \
   wget zip unzip make cron nano vim \
   build-essential \
   && apt-get clean
-# ssh 
+# ssh, ssl
 RUN  apt-get update && apt-get install -y \
   openssh-server \
   xclip \
+  libssl-dev \
+  libsasl2-dev \
   && apt-get clean
 
 # gnupg is needed to add new key 
@@ -317,6 +319,8 @@ RUN install2.r --error \
     DBI \
     # provide a common API for access to SQL 1 -based database management systems (DBMSs) such as MySQL 2 , PostgreSQL, Microsoft Access and SQL Server, DB2, Oracle and SQLite
     RODBC \
+    # High-performance MongoDB client based on 'mongo-c-driver' and 'jsonlite'. Includes support for aggregation, indexing, map-reduce, streaming, encryption, enterprise authentication, and GridFS
+    mongolite \    
     && rm -rf /tmp/downloaded_packages/
 
 
