@@ -39,7 +39,7 @@ RUN jupyter serverextension enable --py jupyterlab_git
 RUN pip install chromedriver-binary
 RUN pip install lxml xmlrunner Flask 
 RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy
-RUN pip install email
+RUN pip install smtplib email
 RUN pip install pause humanfriendly
 RUN pip install pytest ipytest  
 RUN pip install xlearn
