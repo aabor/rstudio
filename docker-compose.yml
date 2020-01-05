@@ -149,7 +149,7 @@ services:
       - 8888:8888
     environment:
       TZ: EEST
-      WERKZEUG_DEBUG_PIN: off
+      WERKZEUG_DEBUG_PIN: 'off'
       MONGODB_DATABASE: flaskdb
       MONGODB_USERNAME: $USER
       MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
