@@ -135,7 +135,7 @@ services:
   nbdatascience: 
     image: aabor/nbdatascience
     build: nbdatascience/.
-    command: "sh -c 'jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --notebook-dir=/opt/app/data --allow-root --NotebookApp.password=sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f --NotebookApp.allow_origin=*'"
+    command: "sh -c 'jupyter lab --ip=0.0.0.0 --port=9000 --no-browser --allow-root --NotebookApp.password=sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'"
     #command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
     volumes:
       - /home/$USER/Documents:/home/jovyan/Documents
@@ -147,7 +147,7 @@ services:
       - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
       - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
     ports:
-      - 8888:8888
+      - 9000:9000
     environment:
       TZ: EEST
       WERKZEUG_DEBUG_PIN: 'off'
