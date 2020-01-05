@@ -166,7 +166,6 @@ RUN install2.r --error \
     petrinetR \
     # Process discovery with variants of the Heuristics Miner algorithm
     heuristicsmineR \
-
     # Visualize of process maps based on event logs, in the form of directed graphs
     processmapR \
     # Provides animated process maps based on the 'procesmapR' package
