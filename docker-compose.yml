@@ -3,9 +3,9 @@ services:
   selenium-hub:
     image: selenium/hub:3.141.59-xenon
     environment:
-      - GRID_MAX_SESSION=15
-      - GRID_TIMEOUT=180000
-      - GRID_BROWSER_TIMEOUT=180000      
+      GRID_MAX_SESSION: 15
+      GRID_TIMEOUT: 180000
+      GRID_BROWSER_TIMEOUT: 180000      
     networks: 
       - selenium-hub
   chrome:
@@ -16,11 +16,11 @@ services:
     depends_on:
       - selenium-hub
     environment:
-      - NODE_MAX_INSTANCES=5
-      - NODE_MAX_SESSION=6
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
-      - DBUS_SESSION_BUS_ADDRESS=/dev/null
+      NODE_MAX_INSTANCES: 5
+      NODE_MAX_SESSION: 6
+      HUB_HOST: selenium-hub
+      HUB_PORT: 4444
+      DBUS_SESSION_BUS_ADDRESS: /dev/null
     volumes:
       - /home/$USER/Downloads/Selenium:/home/seluser/Downloads
     networks: 
@@ -32,15 +32,15 @@ services:
     restart: unless-stopped
     command: mongod --auth
     environment:
-      MONGO_INITDB_ROOT_USERNAME: aabor
-      MONGO_INITDB_ROOT_PASSWORD: GkU5#j6x
+      MONGO_INITDB_ROOT_USERNAME: $USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_COMMON_CREDS_PSW
       MONGO_INITDB_DATABASE: flaskdb
       MONGODB_DATA_DIR: /data/db
       MONDODB_LOG_DIR: /dev/null
     volumes:
       - /home/$USER/mongodata:/data/db
     networks:
-      - backend
+      - back-end
   rstudio: 
     image: aabor/rstudio
     build: rstudio/.
@@ -59,16 +59,16 @@ services:
       - "8787:8787"
       - "3838:3838"
     environment:
-      - TZ="EEST"
-      - USER=rstudio
-      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+      TZ: EEST
+      USER: rstudio
+      PASSWORD: $RSTUDIO_COMMON_CREDS_PSW
     restart: "on-failure:30"
     depends_on:
       - chrome
     networks: 
       - selenium-hub
       - front-end 
-      - backend
+      - back-end
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.
@@ -90,16 +90,16 @@ services:
       - "8788:8787"
       - "3839:3838"
     environment:
-      - TZ="EEST"
-      - USER=rstudio
-      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+      TZ: EEST
+      USER: rstudio
+      PASSWORD: $RSTUDIO_COMMON_CREDS_PSW
     restart: always
     depends_on:
       - chrome
     networks: 
       - selenium-hub
       - front-end
-      - backend
+      - back-end
   rstudio-text: 
     image: aabor/rstudio-text
     build: rstudio-text/.
@@ -118,46 +118,53 @@ services:
       - "8789:8787"
       - "3840:3838"
     environment:
-      - TZ="EEST"
-      - USER=rstudio
-      - PASSWORD=$RSTUDIO_COMMON_CREDS_PSW
+      TZ: EEST
+      USER: rstudio
+      PASSWORD: $RSTUDIO_COMMON_CREDS_PSW
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: $USER
+      MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
+      MONGODB_HOSTNAME: mongodb
     restart: always
     networks: 
       - selenium-hub
       - front-end
-      - backend
+      - back-end
     depends_on:
       - chrome
-#   nbdatascience: 
-#     image: aabor/nbdatascience
-#     build: nbdatascience/.
-#     command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
-#     volumes:
-#       - /home/$USER/Documents:/home/jovyan/Documents
-#       - /home/$USER/Documents/Trading/fh:/home/jovyan/work/R/fh/data
-#       - /home/$USER/Documents/Trading/news-csv-arch:/home/jovyan/work/R/fh/data/news-csv-arch
-#       - /home/$USER/projects:/home/jovyan/work
-#       - /home/$USER/.jupyter:/home/jovyan/.jupyter
-#       #- /home/$USER/.kaggle:/home/jovyan/.kaggle
-#       - /home/$USER/.ssh:/home/jovyan/.ssh/  
-#       - /home/$USER/.secrets:/home/jovyan/.secrets/  
-#       - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
-#       - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
-#     ports:
-#       - 8888:8888
-#     environment:
-#       - TZ="EEST"
-#       - WERKZEUG_DEBUG_PIN=off
-#     restart: always
-#     depends_on:
-#       - chrome
-#     networks: 
-#       - selenium-hub
-#       - front-end      
+  nbdatascience: 
+    image: aabor/nbdatascience
+    build: nbdatascience/.
+    command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
+    volumes:
+      - /home/$USER/Documents:/home/jovyan/Documents
+      - /home/$USER/projects:/home/jovyan/work
+      - /home/$USER/.jupyter:/home/jovyan/.jupyter
+      #- /home/$USER/.kaggle:/home/jovyan/.kaggle
+      - /home/$USER/.ssh:/home/jovyan/.ssh/  
+      - /home/$USER/.secrets:/home/jovyan/.secrets/  
+      - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
+      - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
+    ports:
+      - 8888:8888
+    environment:
+      TZ: EEST
+      WERKZEUG_DEBUG_PIN: off
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: $USER
+      MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
+      MONGODB_HOSTNAME: mongodb
+    restart: always
+    depends_on:
+      - chrome
+    networks: 
+      - selenium-hub
+      - back-end
+      - front-end      
 networks:
   selenium-hub:
     external: true
   front-end:
     external: true
-  backend:
+  back-end:
     driver: bridge

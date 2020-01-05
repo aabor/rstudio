@@ -6,6 +6,7 @@ pipeline {
                 USER=credentials('jenkins-current-user')
                 DOCKER_CREDS=credentials('jenkins-docker-credentials')
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
+                MONGO_COMMON_CREDS = credentials('jenkins-mongo-common-creds')
             }            
             steps {
                 labelledShell label: 'Building and tagging docker images...', script: '''

@@ -2,7 +2,7 @@
 # configured for automatic build
 FROM jupyter/datascience-notebook:82d1d0bf0867
 
-LABEL maintainer="A. Borochkin"
+LABEL maintainer="A. Borochkin <aabor@aabor-nn.com>"
 
 USER root
 # installation utilities
@@ -37,7 +37,9 @@ RUN jupyter labextension install -y @jupyterlab/git
 RUN pip install jupyterlab-git 
 RUN jupyter serverextension enable --py jupyterlab_git
 RUN pip install chromedriver-binary
-RUN pip install lxml xmlrunner Flask
+RUN pip install lxml xmlrunner Flask 
+RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy
+RUN pip install email
 RUN pip install pause humanfriendly
 RUN pip install pytest ipytest  
 RUN pip install xlearn
