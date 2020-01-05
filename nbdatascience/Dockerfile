@@ -30,15 +30,16 @@ RUN apt-get update && apt-get install -y \
 
 USER jovyan
 
-RUN jupyter lab build
+RUN jupyter lab build 
 
+RUN jupyter labextension install nbdime-jupyterlab
 RUN jupyter labextension install -y @jupyterlab/toc
 RUN jupyter labextension install -y @jupyterlab/git
 RUN pip install jupyterlab-git 
 RUN jupyter serverextension enable --py jupyterlab_git
 RUN pip install chromedriver-binary
 RUN pip install lxml xmlrunner Flask 
-RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy
+RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy pymysql
 RUN pip install mime 
 RUN pip install pause humanfriendly
 RUN pip install pytest ipytest  
