@@ -41,34 +41,6 @@ services:
       - /home/$USER/mongodata:/data/db
     networks:
       - back-end
-  rstudio: 
-    image: aabor/rstudio
-    build: rstudio/.
-    volumes:
-      - /home/$USER/projects:/home/rstudio/R
-      - /home/$USER/Documents:/home/rstudio/Documents
-      - /home/$USER/.ssh:/home/rstudio/.ssh/  
-      - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
-      - /home/$USER/.Renviron:/home/rstudio/.Renviron
-      - /home/$USER/rstudio/rstudio:/home/rstudio
-      - /home/$USER/rstudio/rstudio:/srv/shiny-server 
-      - /home/$USER/rstudio/rstudio/.log:/var/log/shiny-server
-    ports:
-      - "8787:8787"
-      - "3838:3838"
-    environment:
-      TZ: EEST
-      USER: rstudio
-      PASSWORD: $RSTUDIO_COMMON_CREDS_PSW
-    restart: "on-failure:30"
-    depends_on:
-      - chrome
-    networks: 
-      - selenium-hub
-      - front-end 
-      - back-end
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.
@@ -136,7 +108,6 @@ services:
     image: aabor/nbdatascience
     build: nbdatascience/.
     command: "sh -c 'jupyter lab --ip=0.0.0.0 --port=9000 --no-browser --allow-root --NotebookApp.password=sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'"
-    #command: ['start-notebook.sh', '--ip', '0.0.0.0', '--no-browser', "--NotebookApp.password='sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'", "--NotebookApp.allow_origin='*'"]    
     volumes:
       - /home/$USER/Documents:/home/jovyan/Documents
       - /home/$USER/projects:/home/jovyan/work
