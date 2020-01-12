@@ -1,6 +1,6 @@
 # aabor/nbdatascience
 # configured for automatic build
-FROM jupyter/datascience-notebook:82d1d0bf0867
+FROM jupyter/datascience-notebook:7a0c7325e470
 
 LABEL maintainer="A. Borochkin <aabor@aabor-nn.com>"
 
@@ -37,6 +37,10 @@ RUN jupyter labextension install -y @jupyterlab/toc
 RUN jupyter labextension install -y @jupyterlab/git
 RUN pip install jupyterlab-git 
 RUN jupyter serverextension enable --py jupyterlab_git
+
+#RUN pip install -U setuptools pip
+#RUN pip install cupy-cuda101
+
 RUN pip install chromedriver-binary
 RUN pip install lxml xmlrunner Flask 
 RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy pymysql
@@ -49,6 +53,7 @@ RUN pip install dataset
 RUN pip install openpyxl XlsxWriter
 RUN pip install fuzzywuzzy
 RUN pip install nltk stopwordsiso
-
+#RUN pip install -U spacy[cuda101]
+RUN pip install -U spacy
 #RUN pip install psycopg2
 #RUN pip install pygresql
