@@ -174,7 +174,6 @@ RUN install2.r --error \
     processmonitR \
     && rm -rf /tmp/downloaded_packages/
 
-USER rstudio
 # RUN installGithub.r \
 
 #     && rm -rf /tmp/downloaded_packages/
