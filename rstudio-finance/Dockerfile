@@ -132,3 +132,4 @@ RUN install2.r --error \
     BaPreStoPro \
     && rm -rf /tmp/downloaded_packages/
 
+USER rstudio
