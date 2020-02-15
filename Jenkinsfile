@@ -37,7 +37,6 @@ pipeline {
                     docker push aabor/rstudio-text:latest
                 '''
                 labelledShell label: 'Starting docker containers...', script: '''
-                    echo "$MONGO_COMMON_CREDS_PSW"
                     docker-compose up -d --remove-orphans
                 '''
             }
