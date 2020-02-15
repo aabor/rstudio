@@ -104,7 +104,7 @@ services:
       MONGODB_DATABASE: flaskdb
       MONGODB_USERNAME: $USER
       MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
-      MONGODB_HOSTNAME: mongodb
+      MONGODB_HOSTNAME: mongo
     restart: always
     networks: 
       - selenium-hub
@@ -133,7 +133,7 @@ services:
       MONGODB_DATABASE: flaskdb
       MONGODB_USERNAME: $USER
       MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
-      MONGODB_HOSTNAME: mongodb
+      MONGODB_HOSTNAME: mongo
     restart: always
     depends_on:
       - chrome
