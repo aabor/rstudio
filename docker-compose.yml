@@ -90,7 +90,6 @@ services:
       - /home/$USER/.secrets:/home/rstudio/.secrets/  
       - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
       - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
-      - /home/$USER/.Renviron:/home/rstudio/.Renviron
       - /home/$USER/rstudio/rstudio-text:/home/rstudio  
       - /home/$USER/rstudio/rstudio-text:/srv/shiny-server 
       - /home/$USER/rstudio/rstudio-text/.log:/var/log/shiny-server      
