@@ -27,7 +27,8 @@ services:
       - selenium-hub      
     restart: always
   mongo:
-    image: mongo:4.2.3-bionic
+    image: aabor/mongo
+    build: mongo/.
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: $USER
@@ -35,8 +36,10 @@ services:
       MONGO_INITDB_DATABASE: flaskdb
       MONGODB_DATA_DIR: /data/db
       #MONDODB_LOG_DIR: /dev/null
+    ports:
+      - 27027-27029:27017-27019
     volumes:
-      - /home/$USER/data/db:/data/db
+    - /home/$USER/data/db:/data/db
     networks:
       - back-end
   mongo-express:
