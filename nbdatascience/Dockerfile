@@ -1,6 +1,6 @@
 # aabor/nbdatascience
 # configured for automatic build
-FROM jupyter/tensorflow-notebook:7a0c7325e470
+FROM jupyter/tensorflow-notebook:31b807ec9e83
 
 LABEL maintainer="A. Borochkin <aabor@aabor-nn.com>"
 
@@ -41,19 +41,10 @@ RUN jupyter serverextension enable --py jupyterlab_git
 #RUN pip install -U setuptools pip
 #RUN pip install cupy-cuda101
 
-RUN pip install chromedriver-binary
-RUN pip install lxml xmlrunner Flask 
-RUN pip install pymongo mongoengine mysql-connector-python SQLAlchemy pymysql
-RUN pip install mime 
-RUN pip install pause humanfriendly
-RUN pip install pytest ipytest  
-RUN pip install xlearn
-RUN pip install kaggle
-RUN pip install dataset
-RUN pip install openpyxl XlsxWriter
-RUN pip install fuzzywuzzy
-RUN pip install nltk stopwordsiso
-#RUN pip install -U spacy[cuda101]
-RUN pip install -U spacy
-#RUN pip install psycopg2
-#RUN pip install pygresql
+COPY requirements.txt /opt/app/
+WORKDIR /opt/app
+RUN pip install -r requirements.txt
+
+RUN pip freeze
+
+WORKDIR /home/jovyan/work
