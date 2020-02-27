@@ -44,6 +44,9 @@ RUN jupyter serverextension enable --py jupyterlab_git
 COPY requirements.txt /opt/app/
 WORKDIR /opt/app
 RUN pip install -r requirements.txt
+RUN python -m spacy download en_core_web_sm 
+RUN python -m spacy download en_core_web_md 
+RUN python -m spacy download en_core_web_lg
 
 RUN pip freeze
 
