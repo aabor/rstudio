@@ -48,6 +48,9 @@ RUN python -m spacy download en_core_web_sm
 RUN python -m spacy download en_core_web_md 
 RUN python -m spacy download en_core_web_lg
 
+# Arctic MongoDB-powered financial tick store
+RUN pip install git+https://github.com/manahl/arctic.git
+
 RUN pip freeze
 
 WORKDIR /home/jovyan/work
