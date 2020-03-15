@@ -44,4 +44,6 @@ fuzzywuzzy
 nltk 
 stopwordsiso
 spacy
+jhTAlib
+statsmodels
 # spacy[cuda101]
