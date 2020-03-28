@@ -48,7 +48,7 @@ RUN python -m spacy download en_core_web_sm
 RUN python -m spacy download en_core_web_md 
 RUN python -m spacy download en_core_web_lg
 
-# Arctic MongoDB-powered financial tick store
+# Arctic MongoDB-powered financial tick store. It supports Pandas, numpy arrays and pickled objects out-of-the-box, with pluggable support for other data types and optional versioning
 RUN pip install git+https://github.com/manahl/arctic.git
 
 RUN pip freeze
