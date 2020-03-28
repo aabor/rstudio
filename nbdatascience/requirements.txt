@@ -46,5 +46,4 @@ stopwordsiso
 spacy
 jhTAlib
 statsmodels
-Flask-Session
 # spacy[cuda101]
