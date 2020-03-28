@@ -166,6 +166,8 @@ Creates containers:
 
 `rstudio-text`
 
+`nbdatascience`
+
 # Webhooks
 
 Build is triggered in Jenkins via Webhook
