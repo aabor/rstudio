@@ -8,6 +8,7 @@ pipeline {
                 RSTUDIO_COMMON_CREDS = credentials('jenkins-rstudio-common-creds')
                 MONGO_COMMON_CREDS = credentials('jenkins-mongo-common-creds')
                 MONGO_FHQ = credentials('jenkins-mongo-fh-creds')
+                FLASK_SECRET_KEY = credentials('fh-flask-secret-key')
             }            
             steps {
                 labelledShell label: 'Building and tagging docker images...', script: '''
