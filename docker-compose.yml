@@ -131,6 +131,7 @@ services:
       MONGODB_USERNAME: $USER
       MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
       MONGODB_FH_PASSWORD: $MONGO_FHQ_PSW
+      FLASK_SECRET_KEY: $FLASK_SECRET_KEY
       MONGODB_HOSTNAME: mongo
     restart: always
     depends_on:
