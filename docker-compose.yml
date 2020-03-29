@@ -130,6 +130,7 @@ services:
       MONGODB_DATABASE: flaskdb
       MONGODB_USERNAME: $USER
       MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
+      MONGODB_FH_PASSWORD: $MONGO_FHQ_PSW
       MONGODB_HOSTNAME: mongo
     restart: always
     depends_on:
