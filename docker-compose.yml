@@ -41,7 +41,7 @@ services:
     volumes:
     - /home/$USER/data/db:/data/db
     networks:
-      - back-end
+      - db-connection
   mongo-express:
     image: mongo-express
     restart: always
@@ -51,7 +51,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: $USER
       ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGO_COMMON_CREDS_PSW
     networks:
-      - back-end
+      - db-connection
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.
@@ -82,7 +82,7 @@ services:
     networks: 
       - selenium-hub
       - front-end
-      - back-end
+      - db-connection
   rstudio-text: 
     image: aabor/rstudio-text
     build: rstudio-text/.
@@ -106,7 +106,7 @@ services:
     networks: 
       - selenium-hub
       - front-end
-      - back-end
+      - db-connection
     depends_on:
       - chrome
   nbdatascience: 
@@ -138,12 +138,14 @@ services:
       - chrome
     networks: 
       - selenium-hub
-      - back-end
+      - db-connection
       - front-end      
 networks:
   selenium-hub:
     external: true
   front-end:
+    external: true
+  db-connection:
     external: true
   back-end:
     driver: bridge

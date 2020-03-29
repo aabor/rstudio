@@ -22,6 +22,7 @@ pipeline {
                     # recreate networks after system pruning
                     docker network create selenium-hub || true
                     docker network create front-end || true
+                    docker network create db-connection || true
                 '''
                 labelledShell label: 'Pushing images to docker registry...', script: '''
                     echo 'login to docker'
