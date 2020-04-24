@@ -1,13 +1,13 @@
 # aabor/nbdatascience
 # configured for automatic build
-FROM jupyter/tensorflow-notebook:31b807ec9e83
+FROM jupyter/tensorflow-notebook:8b4d6f6ac0d7
 
 LABEL maintainer="A. Borochkin <aabor@aabor-nn.com>"
 
 USER root
 # installation utilities
 RUN  apt-get update && apt-get install -y \
-  wget zip unzip make cron nano vim \
+  wget zip unzip make cron nano vim tree \
   build-essential \
   && apt-get clean
 
@@ -34,24 +34,23 @@ RUN jupyter lab build
 
 RUN jupyter labextension install nbdime-jupyterlab
 RUN jupyter labextension install -y @jupyterlab/toc
-RUN jupyter labextension install -y @jupyterlab/git
+#RUN jupyter labextension install -y @jupyterlab/git
 RUN pip install jupyterlab-git 
 RUN jupyter serverextension enable --py jupyterlab_git
 
-#RUN pip install -U setuptools pip
-#RUN pip install cupy-cuda101
-
 COPY requirements.txt /opt/app/
 WORKDIR /opt/app
+
 RUN pip install -r requirements.txt
-RUN python -m spacy download en_core_web_sm 
-RUN python -m spacy download en_core_web_md 
-RUN python -m spacy download en_core_web_lg
-RUN pip install Flask-Session
-RUN pip install flask-mongo-sessions
+
+RUN conda install numba cudatoolkit
 
 # Arctic MongoDB-powered financial tick store. It supports Pandas, numpy arrays and pickled objects out-of-the-box, with pluggable support for other data types and optional versioning
 RUN pip install git+https://github.com/manahl/arctic.git
+
+RUN python -m spacy download en_core_web_lg
+RUN pip install Flask-Session
+RUN pip install flask-mongo-sessions
 
 RUN pip freeze
 
