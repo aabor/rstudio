@@ -18,6 +18,7 @@ pipeline {
                     docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
                     docker tag $USER/rstudio-finance:latest $USER/rstudio-finance:$GIT_VERSION
                     docker tag $USER/rstudio-text:latest $USER/rstudio-text:$GIT_VERSION
+                    docker tag $USER/nbdatascience:latest $USER/nbdatascience:$GIT_VERSION
                     docker system prune -f # remove orphan containers, volumes, networks and images
                     # recreate networks after system pruning
                     docker network create selenium-hub || true
@@ -38,6 +39,9 @@ pipeline {
                     echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-text:$GIT_VERSION
                     docker push aabor/rstudio-text:latest
+                    echo "Pushing nbdatascience:$GIT_VERSION to docker hub"
+                    docker push aabor/nbdatascience:$GIT_VERSION
+                    docker push aabor/nbdatascience:latest
                 '''
                 labelledShell label: 'Starting docker containers...', script: '''
                     docker-compose up -d --remove-orphans
