@@ -52,6 +52,37 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGO_COMMON_CREDS_PSW
     networks:
       - db-connection
+  rstudio: 
+    image: aabor/rstudio
+    build: rstudio/.
+    volumes:
+      - /home/$USER/projects:/home/rstudio/R
+      - /home/$USER/Documents:/home/rstudio/Documents
+      - /home/$USER/Documents/Trading/fh:/home/rstudio/R/fh/data
+      - /home/$USER/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
+      - /home/$USER/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
+      - /home/$USER/.ssh:/home/rstudio/.ssh/  
+      - /home/$USER/.secrets:/home/rstudio/.secrets/  
+      - /home/$USER/.Renviron:/home/rstudio/.Renviron
+      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
+      - /home/$USER/rstudio/rstudio-finance:/home/rstudio  
+      - /home/$USER/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/$USER/rstudio/rstudio-finance/.log:/var/log/shiny-server
+    ports:
+      - "8787:8787"
+      - "3838:3838"
+    environment:
+      TZ: EEST
+      USER: rstudio
+      PASSWORD: $RSTUDIO_COMMON_CREDS_PSW
+    restart: always
+    depends_on:
+      - chrome
+    networks: 
+      - selenium-hub
+      - front-end
+      - db-connection
   rstudio-finance: 
     image: aabor/rstudio-finance
     build: rstudio-finance/.

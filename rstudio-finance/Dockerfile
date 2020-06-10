@@ -19,14 +19,14 @@ RUN  apt-get update && apt-get install -y \
     # QuantLib Library aims to provide a comprehensive software framework for quantitative finance. The goal is to
     # provide a standard open source library for quantitative analysis, modeling, trading, and risk management of
     # financial assets  
+    # GSL - GNU Scientific Library
+    libgslcblas0 \
+    libgsl0-dev \
     libquantlib0v5 \
     libquantlib0-dev \
     libboost-all-dev \
     quantlib-python \
-    quantlib-examples \
-    # GSL - GNU Scientific Library
-    libgsl2 \
-    libgsl0-dev 
+    quantlib-examples
 
 RUN install2.r --error \ 
     # Accompanying package to the book Quantitative Risk Management: Concepts, Techniques and Tools by Alexander J.

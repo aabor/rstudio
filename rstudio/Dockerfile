@@ -1,6 +1,6 @@
 # aabor/rstudio
 # configured for automatic build
-FROM rocker/tidyverse:3.6.1
+FROM rocker/tidyverse:4.0.0-ubuntu18.04
 
 LABEL maintainer="A. Borochkin"
 
@@ -224,35 +224,35 @@ RUN install2.r --error \
 # RUN install2.r --error \ 
 #     && rm -rf /tmp/downloaded_packages/
 
-# Add shiny server
-RUN export ADD=shiny && bash /etc/cont-init.d/add
+# # Add shiny server
+# RUN export ADD=shiny && bash /etc/cont-init.d/add
 
-##For shiny
-RUN install2.r --error \ 
-  # Deployment Interface for R Markdown Documents and Shiny Applications. 
-  rsconnect \
-  # Functions to improve user experience of shiny apps by Dean Attali
-  shinyjs \
-  # Create dashboards with 'Shiny'. A dashboard has three parts: a header, a sidebar, and a body. 
-  shinydashboard \
-  #alter the overall appearance of your Shiny application
-  shinythemes \
-  # A colour picker that can be used as an input in Shiny apps or Rmarkdown documents. The colour picker supports alpha
-  # opacity, custom colour palettes, and many more options.
-  colourpicker \
-  # widgets to use in Shiny applications: Bootstrap switch, Material switch, Pretty Checkbox, Sweet Alert, Slider Text,
-  # Knob Input, Select picker, Checkbox and radio buttons, Search bar, Dropdown button
-  shinyWidgets \
-  && rm -rf /tmp/downloaded_packages/
+# ##For shiny
+# RUN install2.r --error \ 
+#   # Deployment Interface for R Markdown Documents and Shiny Applications. 
+#   rsconnect \
+#   # Functions to improve user experience of shiny apps by Dean Attali
+#   shinyjs \
+#   # Create dashboards with 'Shiny'. A dashboard has three parts: a header, a sidebar, and a body. 
+#   shinydashboard \
+#   #alter the overall appearance of your Shiny application
+#   shinythemes \
+#   # A colour picker that can be used as an input in Shiny apps or Rmarkdown documents. The colour picker supports alpha
+#   # opacity, custom colour palettes, and many more options.
+#   colourpicker \
+#   # widgets to use in Shiny applications: Bootstrap switch, Material switch, Pretty Checkbox, Sweet Alert, Slider Text,
+#   # Knob Input, Select picker, Checkbox and radio buttons, Search bar, Dropdown button
+#   shinyWidgets \
+#   && rm -rf /tmp/downloaded_packages/
 
-##For shiny, Java dependent libraries
-RUN install2.r --error \ 
-  # R interface to the JavaScript library DataTables. R data objects (matrices or data frames) can be displayed as
-  # tables on HTML pages, and DataTables provides filtering, pagination, sorting, and many other features in the tables
-  DT \
-  # R interface to the dygraphs JavaScript charting library. It provides rich facilities for charting time-series data
-  dygraphs \
-  && rm -rf /tmp/downloaded_packages/
+# ##For shiny, Java dependent libraries
+# RUN install2.r --error \ 
+#   # R interface to the JavaScript library DataTables. R data objects (matrices or data frames) can be displayed as
+#   # tables on HTML pages, and DataTables provides filtering, pagination, sorting, and many other features in the tables
+#   DT \
+#   # R interface to the dygraphs JavaScript charting library. It provides rich facilities for charting time-series data
+#   dygraphs \
+#   && rm -rf /tmp/downloaded_packages/
 
 
 
@@ -300,10 +300,10 @@ RUN install2.r --error \
   yaml \
   && rm -rf /tmp/downloaded_packages/
 
-# Latex support
-RUN  apt-get update && apt-get install -y \
-  texlive-full \
-  && apt-get clean
+# # Latex support
+# RUN  apt-get update && apt-get install -y \
+#   texlive-full \
+#   && apt-get clean
 
 # Database support
 RUN install2.r --error \ 
@@ -311,10 +311,6 @@ RUN install2.r --error \
     RMySQL \
     # A modern 'MySQL' client based on 'Rcpp'
     RMariaDB \
-    # gWidgets API for Building Toolkit-Independent, Interactive GUIs
-    gWidgets \
-    # Provides a graphical user interface to connect with databases that use MySQL
-    dbConnect \
     # defines a common interface between the R and database management systems (DBMS)
     DBI \
     # provide a common API for access to SQL 1 -based database management systems (DBMSs) such as MySQL 2 , PostgreSQL, Microsoft Access and SQL Server, DB2, Oracle and SQLite
