@@ -15,7 +15,6 @@ openxlsx, XLConnect (Java dependent)
 
 R packages for C++
 
-`shiny server`
 
 ## Additional tidyverse companion packages for time series
 
