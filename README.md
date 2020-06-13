@@ -110,10 +110,6 @@ Network Analysis and Visualization
 
 ## RESTful API
 
-Gmail RESTful API
-
-`gmailr`
-
 Generate and serve an HTTP API from R functions
  
 `plumber`
