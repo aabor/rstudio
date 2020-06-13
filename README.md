@@ -17,13 +17,6 @@ R packages for C++
 
 `shiny server`
 
-## Shiny packages
-
-shinydashboard, shinythemes
-
-Java dependent: DT, dygraphs
-
-
 ## Additional tidyverse companion packages for time series
 
 A Tool Kit for Working with Time Series in R
