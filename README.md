@@ -15,7 +15,6 @@ openxlsx, XLConnect (Java dependent)
 
 R packages for C++
 
-
 ## Additional tidyverse companion packages for time series
 
 A Tool Kit for Working with Time Series in R
