@@ -140,21 +140,20 @@ services:
       - db-connection
     depends_on:
       - chrome
-  nbdatascience: 
-    image: aabor/nbdatascience
-    build: nbdatascience/.
-    command: "sh -c 'jupyter lab --ip=0.0.0.0 --port=9000 --no-browser --allow-root --NotebookApp.password=sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'"
+  tensorflow-jupyter: 
+    image: aabor/tensorflow:latest
+    build: tensorflow/.
     volumes:
-      - /home/$USER/Documents:/home/jovyan/Documents
-      - /home/$USER/projects:/home/jovyan/work
-      - /home/$USER/.jupyter:/home/jovyan/.jupyter
-      #- /home/$USER/.kaggle:/home/jovyan/.kaggle
-      - /home/$USER/.ssh:/home/jovyan/.ssh/  
-      - /home/$USER/.secrets:/home/jovyan/.secrets/  
-      - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
-      - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
+      - /home/$USER/projects:/tf/projects
+      - /home/$USER/Documents:/tf/Documents
+      - /home/$USER/Downloads:/tf/Downloads
+      - /home/$USER/.jupyter:/root/.jupyter
+      - /home/$USER/tensorflow_datasets:/root/tensorflow_datasets
+      - /home/$USER/.logdir:/root/logs
     ports:
-      - 9000:9000
+      - "8888:8888"
+      - "6006:6006"
+    restart: always
     environment:
       TZ: EEST
       WERKZEUG_DEBUG_PIN: 'off'
@@ -165,12 +164,41 @@ services:
       FLASK_SECRET_KEY: $FLASK_SECRET_KEY
       MONGODB_HOSTNAME: mongo
     restart: always
-    depends_on:
-      - chrome
     networks: 
       - selenium-hub
       - db-connection
       - front-end      
+  # nbdatascience: 
+  #   image: aabor/nbdatascience
+  #   build: nbdatascience/.
+  #   command: "sh -c 'jupyter lab --ip=0.0.0.0 --port=9000 --no-browser --allow-root --NotebookApp.password=sha1:2089440df3ba:af2858ae02c2b5f3e28de1936fd8c9ecbb5ef98f'"
+  #   volumes:
+  #     - /home/$USER/Documents:/home/jovyan/Documents
+  #     - /home/$USER/projects:/home/jovyan/work
+  #     - /home/$USER/.jupyter:/home/jovyan/.jupyter
+  #     #- /home/$USER/.kaggle:/home/jovyan/.kaggle
+  #     - /home/$USER/.ssh:/home/jovyan/.ssh/  
+  #     - /home/$USER/.secrets:/home/jovyan/.secrets/  
+  #     - /home/$USER/.httr-oauth:/home/jovyan/.httr-oauth
+  #     - /home/$USER/.gitconfig:/home/jovyan/.gitconfig
+  #   ports:
+  #     - 9000:9000
+  #   environment:
+  #     TZ: EEST
+  #     WERKZEUG_DEBUG_PIN: 'off'
+  #     MONGODB_DATABASE: flaskdb
+  #     MONGODB_USERNAME: $USER
+  #     MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
+  #     MONGODB_FH_PASSWORD: $MONGO_FHQ_PSW
+  #     FLASK_SECRET_KEY: $FLASK_SECRET_KEY
+  #     MONGODB_HOSTNAME: mongo
+  #   restart: always
+  #   depends_on:
+  #     - chrome
+  #   networks: 
+  #     - selenium-hub
+  #     - db-connection
+  #     - front-end      
 networks:
   selenium-hub:
     external: true
