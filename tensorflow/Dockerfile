@@ -38,9 +38,9 @@ RUN jt -t chesterish
 # install Jupyter notebooks extentions
 # https://github.com/ipython-contrib/jupyter_contrib_nbextensions
 RUN pip install jupyter_contrib_nbextensions 
-RUN pip install jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+RUN jupyter contrib nbextension install --user
+RUN pip install jupyter_nbextensions_configurator
+RUN jupyter nbextensions_configurator enable --user
 # in notebook with mounted external folder .jupyter:/root/.jupyter
-#!jupyter contrib nbextension install --user
-#!jupyter nbextensions_configurator enable --user
-#!jupyter nbextension enable codefolding/main 
+#!jupyter nbextension enable ...
 # in jupyter_nbextensions_configurator enable scrolldown autoscroll
