@@ -34,3 +34,9 @@ RUN pip install pytest pytest-flask testpath mime dataset openpyxl
 RUN pip install kaggle pause humanfriendly
 RUN pip install pymongo Flask-Session flask-mongo-sessions
 RUN pip install numba
+# install Jupyter notebooks extentions
+# https://github.com/ipython-contrib/jupyter_contrib_nbextensions
+RUN pip install jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+RUN jupyter contrib nbextension install --user
+RUN jupyter nbextensions_configurator enable --user
+#RUN jupyter nbextension enable
