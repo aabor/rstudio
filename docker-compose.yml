@@ -53,7 +53,7 @@ services:
     networks:
       - db-connection
   rstudio: 
-    image: aabor/rstudio
+    image: aabor/rstudio:latest
     build: rstudio/.
     volumes:
       - /home/$USER/projects:/home/rstudio/R
@@ -84,7 +84,7 @@ services:
       - front-end
       - db-connection
   rstudio-finance: 
-    image: aabor/rstudio-finance
+    image: aabor/rstudio-finance:latest
     build: rstudio-finance/.
     volumes:
       - /home/$USER/projects:/home/rstudio/R
@@ -115,7 +115,7 @@ services:
       - front-end
       - db-connection
   rstudio-text: 
-    image: aabor/rstudio-text
+    image: aabor/rstudio-text:latest
     build: rstudio-text/.
     volumes:
       - /home/$USER/Documents:/home/rstudio/Documents
@@ -140,34 +140,6 @@ services:
       - db-connection
     depends_on:
       - chrome
-  # tensorflow-jupyter: 
-  #   image: aabor/tensorflow:latest
-  #   build: tensorflow/.
-  #   volumes:
-  #     - /home/$USER/projects:/tf/projects
-  #     - /home/$USER/Documents:/tf/Documents
-  #     - /home/$USER/Downloads:/tf/Downloads
-  #     - /home/$USER/.jupyter:/root/.jupyter
-  #     - /home/$USER/tensorflow_datasets:/root/tensorflow_datasets
-  #     - /home/$USER/.logdir:/root/logs
-  #   ports:
-  #     - "8888:8888"
-  #     - "6006:6006"
-  #   restart: always
-  #   environment:
-  #     TZ: EEST
-  #     WERKZEUG_DEBUG_PIN: 'off'
-  #     MONGODB_DATABASE: flaskdb
-  #     MONGODB_USERNAME: $USER
-  #     MONGODB_PASSWORD: $MONGO_COMMON_CREDS_PSW
-  #     MONGODB_FH_PASSWORD: $MONGO_FHQ_PSW
-  #     FLASK_SECRET_KEY: $FLASK_SECRET_KEY
-  #     MONGODB_HOSTNAME: mongo
-  #   restart: always
-  #   networks: 
-  #     - selenium-hub
-  #     - db-connection
-  #     - front-end      
   # nbdatascience: 
   #   image: aabor/nbdatascience
   #   build: nbdatascience/.

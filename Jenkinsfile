@@ -39,9 +39,6 @@ pipeline {
                     echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-text:$GIT_VERSION
                     docker push aabor/rstudio-text:latest
-                    echo "Pushing nbdatascience:$GIT_VERSION to docker hub"
-                    docker push aabor/nbdatascience:$GIT_VERSION
-                    docker push aabor/nbdatascience:latest
                 '''
                 labelledShell label: 'Starting docker containers...', script: '''
                     docker-compose up -d --remove-orphans
