@@ -18,7 +18,6 @@ pipeline {
                     docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
                     docker tag $USER/rstudio-finance:latest $USER/rstudio-finance:$GIT_VERSION
                     docker tag $USER/rstudio-text:latest $USER/rstudio-text:$GIT_VERSION
-                    docker tag $USER/nbdatascience:latest $USER/nbdatascience:$GIT_VERSION
                     docker system prune -f # remove orphan containers, volumes, networks and images
                     # recreate networks after system pruning
                     docker network create selenium-hub || true
