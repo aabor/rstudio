@@ -120,12 +120,14 @@ RUN installGithub.r \
    && rm -rf /tmp/downloaded_packages/
 
 
+RUN installGithub.r \
+    gaborcsardi/pkgconfig \
+    igraph/rigraph
+
 # Graph visualisation
 RUN install2.r --error \ 
     # Visualize the graphs and take advantage of any aesthetic properties assigned to nodes and edges
     DiagrammeR \
-    # R package for network analysis
-    igraph \
     # tidy interfaces to a lot of common graph algorithms
     tidygraph \
     #  ggraph is an extension of the ggplot2 API tailored to graph visualizations and provides the same flexible approach to building up plots layer by layer
