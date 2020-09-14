@@ -1,6 +1,6 @@
 # aabor/rstudio
 # configured for automatic build
-FROM rocker/tidyverse:4.0.0
+FROM rocker/tidyverse:4.0.0-ubuntu18.04
 
 LABEL maintainer="A. Borochkin"
 
