@@ -1,5 +1,5 @@
 # aabor/rstudio-text
-FROM aabor/rstudio
+FROM aabor/rstudio:latest
 
 # install poppler, some dependencies of other R packages
 RUN apt-get update && apt-get install -y \
@@ -119,11 +119,6 @@ RUN installGithub.r \
    nik01010/dashboardthemes \
    && rm -rf /tmp/downloaded_packages/
 
-
-RUN installGithub.r \
-    gaborcsardi/pkgconfig \
-    igraph/rigraph
-
 # Graph visualisation
 RUN install2.r --error \ 
     # Visualize the graphs and take advantage of any aesthetic properties assigned to nodes and edges
@@ -166,9 +161,6 @@ RUN install2.r --error \
     # Functions for constructing dashboards for business process monitoring
     processmonitR \
     && rm -rf /tmp/downloaded_packages/
-
-RUN install2.r --error \ 
-    testit
 
 # RUN installGithub.r \
 

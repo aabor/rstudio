@@ -1,12 +1,12 @@
 # aabor/rstudio
 # configured for automatic build
-FROM rocker/tidyverse:3.6.3-ubuntu18.04
+FROM rocker/tidyverse:4.0.0-ubuntu18.04
 
 LABEL maintainer="A. Borochkin"
 
 # installation utilities
 RUN  apt-get update && apt-get install -y \
-  wget zip unzip make cron nano vim \
+  wget zip unzip make cron nano vim curl\
   build-essential \
   && apt-get clean
 # ssh, ssl
@@ -21,6 +21,11 @@ RUN  apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
   gnupg2 \
   && apt-get clean
+
+# some python packages
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN python3 get-pip.py
+RUN pip install numpy pandas tabulate
 
 # Prerequisitives to OpenGL
 RUN  apt-get update && apt-get install -y \
@@ -43,7 +48,7 @@ RUN install2.r --error \
   doParallel \
   && rm -rf /tmp/downloaded_packages/
 
-# Java 8
+# System dependencies
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     ## for rJava
@@ -60,6 +65,8 @@ RUN apt-get update \
     librdf0-dev \
     ## for V8-based javascript wrappers
     libv8-dev \
+    ## system dependency for igraph
+    glpk-utils \
     && apt-get clean
 
 # System utilities
@@ -75,6 +82,8 @@ RUN install2.r --error \
   feedeR \
   # JUnit tests
   testthat \
+  # Provides two convenience functions assert() and test_pkg() to facilitate testing R packages
+  testit \
   # Low-Level R to Java Interface
   rJava \  
   # conversion to and from data in Javascript object notation (JSON) format
@@ -300,11 +309,6 @@ RUN install2.r --error \
   yaml \
   && rm -rf /tmp/downloaded_packages/
 
-# # Latex support
-# RUN  apt-get update && apt-get install -y \
-#   texlive-full \
-#   && apt-get clean
-
 # Database support
 RUN install2.r --error \ 
     # Legacy 'DBI' interface to 'MySQL' / 'MariaDB' based on old code ported from S-PLUS
@@ -318,5 +322,3 @@ RUN install2.r --error \
     # High-performance MongoDB client based on 'mongo-c-driver' and 'jsonlite'. Includes support for aggregation, indexing, map-reduce, streaming, encryption, enterprise authentication, and GridFS
     mongolite \    
     && rm -rf /tmp/downloaded_packages/
-
-
