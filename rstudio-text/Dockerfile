@@ -174,6 +174,9 @@ RUN install2.r --error \
     processmonitR \
     && rm -rf /tmp/downloaded_packages/
 
+RUN install2.r --error \ 
+    testit
+
 # RUN installGithub.r \
 
 #     && rm -rf /tmp/downloaded_packages/
