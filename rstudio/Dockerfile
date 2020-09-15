@@ -67,6 +67,7 @@ RUN apt-get update \
     libv8-dev \
     ## system dependency for igraph
     glpk-utils \
+    tzdata \
     && apt-get clean
 
 # System utilities
