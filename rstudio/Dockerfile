@@ -6,6 +6,7 @@ LABEL maintainer="A. Borochkin"
 
 # installation utilities
 RUN  apt-get update && apt-get install -y \
+  apt-utils \
   wget zip unzip make cron nano vim curl\
   build-essential \
   && apt-get clean
@@ -37,6 +38,8 @@ RUN  apt-get update && apt-get install -y \
 
 # System utilities
 RUN install2.r --error \
+  # Cross-platform utilities for prompting the user for credentials or a passphrase
+  askpass \
   # A cross-platform interface to file system operations, built on top of the 'libuv' C library
   fs \
   #  Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'
@@ -61,12 +64,26 @@ RUN apt-get update \
     libhunspell-dev \
     ## system dependency of hadley/pkgdown
     libmagick++-dev \
+    ## poppler to install pdftools to work with .pdf files
+    libpoppler-cpp-dev \
+    ## system dependency of hunspell (devtools)
+    libhunspell-dev \
+    ## (GSL math library dependencies)
+    # for topicmodels on which depends textmineR
+    gsl-bin \
+    libgsl0-dev \
     ## rdf, for redland / linked data
     librdf0-dev \
     ## for V8-based javascript wrappers
     libv8-dev \
     ## system dependency for igraph
     glpk-utils \
+    # Dependencies for gmp
+    libgmp-dev \
+    # Dependencies for Rmpfr
+    libmpfr-dev \
+    # Dependencies for qpdf
+    qpdf \
     && apt-get clean
 
 # System utilities
@@ -91,12 +108,6 @@ RUN install2.r --error \
   # R functions implementing a standard Unit Testing framework, with additional code inspection and report generation tools
   RUnit \   
   && rm -rf /tmp/downloaded_packages/
-
-# A Utility to Send Emails from R, Java dependent
-# https://medium.com/@randerson112358/send-email-using-r-program-1b094208cf2f
-# to fix error Sending the email to the following server failed : smtp.gmail.com:465
-# accounts with 2-Step Verification enabled. Such accounts require an application-specific password for less secure apps acces
-RUN R -e "devtools::install_github('rpremraj/mailR')"
 
 # Different file formats support
 RUN install2.r --error \ 
@@ -163,12 +174,6 @@ RUN install2.r --error \
     janitor \
     && rm -rf /tmp/downloaded_packages/
 
-# Dependencies for Rmpfr, gmp
-RUN apt-get update && apt-get install -y \
-    libgmp-dev \
-    libmpfr-dev \
-    && apt-get clean
-
 RUN install2.r --error \ 
   # Multiple Precision Arithmetic (big integers and rationals, prime number tests, matrix computation), "arithmetic
   # without limitations" using the C library GMP (GNU Multiple Precision Arithmetic)
@@ -194,6 +199,19 @@ RUN install2.r --error \
   RUnit \
   highlight \
   && rm -rf /tmp/downloaded_packages/
+
+# .pdf optimization, C++ dependent
+RUN install2.r --error \ 
+    # Content-preserving transformations transformations of PDF files such as
+    # split, combine, and compress. This package interfaces directly to the
+    # 'qpdf' C++ API and does not require any command line utilities. 
+    qpdf \
+    # Utilities based on 'libpoppler' for extracting text, fonts, attachments
+    # and metadata from a PDF file. Also supports high quality rendering of PDF
+    # documents into PNG, JPEG, TIFF format, or into raw bitmap vectors for
+    # further processing in R
+    pdftools \
+    && rm -rf /tmp/downloaded_packages/
 
 # For developers
 RUN install2.r --error \
