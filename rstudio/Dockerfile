@@ -4,11 +4,13 @@ FROM rocker/tidyverse:4.0.0
 
 LABEL maintainer="A. Borochkin"
 
-# installation utilities
+# system utilities
 RUN  apt-get update && apt-get install -y \
   apt-utils \
   wget zip unzip make cron nano vim curl\
   build-essential \
+  # .pdf files optimization for web, size reduction
+  qpdf \
   && apt-get clean
 # ssh, ssl
 RUN  apt-get update && apt-get install -y \
@@ -82,8 +84,6 @@ RUN apt-get update \
     libgmp-dev \
     # Dependencies for Rmpfr
     libmpfr-dev \
-    # Dependencies for qpdf
-    qpdf \
     && apt-get clean
 
 # System utilities
@@ -199,19 +199,6 @@ RUN install2.r --error \
   RUnit \
   highlight \
   && rm -rf /tmp/downloaded_packages/
-
-# .pdf optimization, C++ dependent
-RUN install2.r --error \ 
-    # Content-preserving transformations transformations of PDF files such as
-    # split, combine, and compress. This package interfaces directly to the
-    # 'qpdf' C++ API and does not require any command line utilities. 
-    qpdf \
-    # Utilities based on 'libpoppler' for extracting text, fonts, attachments
-    # and metadata from a PDF file. Also supports high quality rendering of PDF
-    # documents into PNG, JPEG, TIFF format, or into raw bitmap vectors for
-    # further processing in R
-    pdftools \
-    && rm -rf /tmp/downloaded_packages/
 
 # For developers
 RUN install2.r --error \
