@@ -16,11 +16,16 @@ RUN apt-get update && apt-get install -y \
     librdf0-dev \
     && apt-get clean
 
-# Adobe Acrobat pdf files
+# .pdf optimization, C++ dependent
 RUN install2.r --error \ 
-    # Text Extraction, Rendering and Converting of PDF Documents. Utilities based on 'libpoppler' for extracting text,
-    # fonts, attachments and metadata from a PDF file. Also supports high quality rendering of PDF documents info PNG,
-    # JPEG, TIFF format, or into raw bitmap vectors
+    # Content-preserving transformations transformations of PDF files such as
+    # split, combine, and compress. This package interfaces directly to the
+    # 'qpdf' C++ API and does not require any command line utilities. 
+    qpdf \
+    # Utilities based on 'libpoppler' for extracting text, fonts, attachments
+    # and metadata from a PDF file. Also supports high quality rendering of PDF
+    # documents into PNG, JPEG, TIFF format, or into raw bitmap vectors for
+    # further processing in R
     pdftools \
     && rm -rf /tmp/downloaded_packages/
 
