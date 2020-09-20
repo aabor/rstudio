@@ -11,6 +11,7 @@ RUN  apt-get update && apt-get install -y \
   build-essential \
   # .pdf files optimization for web, size reduction
   qpdf \
+  ghostscript \
   && apt-get clean
 # ssh, ssl
 RUN  apt-get update && apt-get install -y \
