@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
 # some python packages
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 get-pip.py
-RUN pip install numpy pandas tabulate
+RUN pip install numpy pandas tabulate grpcio grpcio-tools
 
 # Prerequisitives to OpenGL
 RUN  apt-get update && apt-get install -y \
@@ -224,6 +224,11 @@ RUN install2.r --error \
     openxlsx \
     # Provides comprehensive functionality to read, write and format Excel data. Java dependent.
     XLConnect \
+    # Easily create tables from data frames/matrices. Create/manipulate tables
+    # row-by-row, column-by-column or cell-by-cell. Use common
+    # formatting/styling to output rich tables as 'HTML', 'HTML widgets' or to
+    # 'Excel'.
+    basictabler \
     && rm -rf /tmp/downloaded_packages/
 
 # connection to Word
