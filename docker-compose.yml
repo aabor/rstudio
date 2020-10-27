@@ -56,19 +56,19 @@ services:
     image: aabor/rstudio:latest
     build: rstudio/.
     volumes:
-      - /home/$USER/projects:/home/rstudio/R
-      - /home/$USER/Documents:/home/rstudio/Documents
-      - /home/$USER/Documents/Trading/fh:/home/rstudio/R/fh/data
-      - /home/$USER/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
-      - /home/$USER/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
-      - /home/$USER/.ssh:/home/rstudio/.ssh/  
-      - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.Renviron:/home/rstudio/.Renviron
-      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
-      - /home/$USER/rstudio/rstudio-finance:/home/rstudio  
-      - /home/$USER/rstudio/rstudio-finance:/srv/shiny-server 
-      - /home/$USER/rstudio/rstudio-finance/.log:/var/log/shiny-server
+      - /home/${USER}/projects:/home/rstudio/R
+      - /home/${USER}/Documents:/home/rstudio/Documents
+      - /home/${USER}/Documents/Trading/fh:/home/rstudio/R/fh/data
+      - /home/${USER}/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
+      - /home/${USER}/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
+      - /home/${USER}/.ssh:/home/rstudio/.ssh/  
+      - /home/${USER}/.secrets:/home/rstudio/.secrets/  
+      - /home/${USER}/.Renviron:/home/rstudio/.Renviron
+      - /home/${USER}/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/${USER}/.gitconfig:/home/rstudio/.gitconfig
+      - /home/${USER}/rstudio/rstudio-finance:/home/rstudio  
+      - /home/${USER}/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/${USER}/rstudio/rstudio-finance/.log:/var/log/shiny-server
     ports:
       - "8787:8787"
       - "3838:3838"
@@ -87,19 +87,19 @@ services:
     image: aabor/rstudio-finance:latest
     build: rstudio-finance/.
     volumes:
-      - /home/$USER/projects:/home/rstudio/R
-      - /home/$USER/Documents:/home/rstudio/Documents
-      - /home/$USER/Documents/Trading/fh:/home/rstudio/R/fh/data
-      - /home/$USER/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
-      - /home/$USER/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
-      - /home/$USER/.ssh:/home/rstudio/.ssh/  
-      - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.Renviron:/home/rstudio/.Renviron
-      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
-      - /home/$USER/rstudio/rstudio-finance:/home/rstudio  
-      - /home/$USER/rstudio/rstudio-finance:/srv/shiny-server 
-      - /home/$USER/rstudio/rstudio-finance/.log:/var/log/shiny-server
+      - /home/${USER}/projects:/home/rstudio/R
+      - /home/${USER}/Documents:/home/rstudio/Documents
+      - /home/${USER}/Documents/Trading/fh:/home/rstudio/R/fh/data
+      - /home/${USER}/Documents/Trading/quotes-csv-arch:/home/rstudio/R/fh/data/quotes-csv-arch
+      - /home/${USER}/Documents/Trading/news-csv-arch:/home/rstudio/R/fh/data/news-csv-arch
+      - /home/${USER}/.ssh:/home/rstudio/.ssh/  
+      - /home/${USER}/.secrets:/home/rstudio/.secrets/  
+      - /home/${USER}/.Renviron:/home/rstudio/.Renviron
+      - /home/${USER}/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/${USER}/.gitconfig:/home/rstudio/.gitconfig
+      - /home/${USER}/rstudio/rstudio-finance:/home/rstudio  
+      - /home/${USER}/rstudio/rstudio-finance:/srv/shiny-server 
+      - /home/${USER}/rstudio/rstudio-finance/.log:/var/log/shiny-server
     ports:
       - "8788:8787"
       - "3839:3838"
@@ -118,16 +118,16 @@ services:
     image: aabor/rstudio-text:latest
     build: rstudio-text/.
     volumes:
-      - /home/$USER/Documents:/home/rstudio/Documents
-      - /home/$USER/projects:/home/rstudio/R
-      - /home/$USER/.ssh:/home/rstudio/.ssh/  
-      - /home/$USER/.secrets:/home/rstudio/.secrets/  
-      - /home/$USER/.Renviron:/home/rstudio/.Renviron
-      - /home/$USER/.httr-oauth:/home/rstudio/.httr-oauth
-      - /home/$USER/.gitconfig:/home/rstudio/.gitconfig
-      - /home/$USER/rstudio/rstudio-text:/home/rstudio  
-      - /home/$USER/rstudio/rstudio-text:/srv/shiny-server 
-      - /home/$USER/rstudio/rstudio-text/.log:/var/log/shiny-server      
+      - /home/${USER}/Documents:/home/rstudio/Documents
+      - /home/${USER}/projects:/home/rstudio/R
+      - /home/${USER}/.ssh:/home/rstudio/.ssh/  
+      - /home/${USER}/.secrets:/home/rstudio/.secrets/  
+      - /home/${USER}/.Renviron:/home/rstudio/.Renviron
+      - /home/${USER}/.httr-oauth:/home/rstudio/.httr-oauth
+      - /home/${USER}/.gitconfig:/home/rstudio/.gitconfig
+      - /home/${USER}/rstudio/rstudio-text:/home/rstudio  
+      - /home/${USER}/rstudio/rstudio-text:/srv/shiny-server 
+      - /home/${USER}/rstudio/rstudio-text/.log:/var/log/shiny-server      
     ports:
       - "8789:8787"
       - "3840:3838"
