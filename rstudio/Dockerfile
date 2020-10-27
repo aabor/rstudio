@@ -337,3 +337,9 @@ RUN install2.r --error \
     # High-performance MongoDB client based on 'mongo-c-driver' and 'jsonlite'. Includes support for aggregation, indexing, map-reduce, streaming, encryption, enterprise authentication, and GridFS
     mongolite \    
     && rm -rf /tmp/downloaded_packages/
+
+# prevent creating .gitconfig directory on the host
+RUN touch /home/rstudio/.gitconfig
+
+# gRPC External Tool
+EXPOSE 50404
