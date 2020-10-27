@@ -26,10 +26,14 @@ RUN apt-get update && apt-get install -y \
   gnupg2 \
   && apt-get clean
 
-# some python packages
+# install python pip
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 get-pip.py
-RUN pip install numpy pandas tabulate grpcio grpcio-tools
+RUN pip install --upgrade pip
+# install python data science packages
+RUN pip install numpy pandas tabulate
+# install python packages necessary for gRPC communication
+RUN pip install grpcio grpcio-tools mysql-connector-python consulate
 
 # Prerequisitives to OpenGL
 RUN  apt-get update && apt-get install -y \
