@@ -104,7 +104,7 @@ RUN install2.r --error \
     # provides R functions for Bayesian inference for various models widely used in marketing and micro-econometrics. The models include linear regression models, multinomial logit, multinomial probit, multivariate probit, multivariate mixture of normals (including clustering), density estimation using finite mixtures of normals as well as Dirichlet Process priors, hierarchical linear models, hierarchical multinomial logit, hierarchical negative binomial regression models, and linear instrumental variable models.
     bayesm \
     # contains R functions to perform Bayesian inference for survival regression models with flexible error and random effects distributions.
-    bayesSurv \
+    # bayesSurv \
     # performs Bayesian inference on the (discrete) power spectrum of time series.
     bspec \
     # a package for time series regression using dynamic linear models using MCMC. 

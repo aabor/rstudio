@@ -13,16 +13,13 @@ pipeline {
             steps {
                 labelledShell label: 'Building and tagging docker images...', script: '''
                     export GIT_VERSION=$(git describe --tags | sed s/v//)
-                    docker-compose down --remove-orphans
+                    #docker-compose down --remove-orphans
                     docker-compose build
                     docker tag $USER/rstudio:latest $USER/rstudio:$GIT_VERSION
                     docker tag $USER/rstudio-finance:latest $USER/rstudio-finance:$GIT_VERSION
                     docker tag $USER/rstudio-text:latest $USER/rstudio-text:$GIT_VERSION
                     docker system prune -f # remove orphan containers, volumes, networks and images
                     # recreate networks after system pruning
-                    docker network create selenium-hub || true
-                    docker network create front-end || true
-                    docker network create db-connection || true
                 '''
                 labelledShell label: 'Pushing images to docker registry...', script: '''
                     echo 'login to docker'
@@ -38,9 +35,6 @@ pipeline {
                     echo "Pushing rstudio-text:$GIT_VERSION to docker hub"
                     docker push aabor/rstudio-text:$GIT_VERSION
                     docker push aabor/rstudio-text:latest
-                '''
-                labelledShell label: 'Starting docker containers...', script: '''
-                    docker-compose up -d --remove-orphans
                 '''
             }
             post {
