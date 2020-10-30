@@ -338,8 +338,7 @@ RUN install2.r --error \
     mongolite \    
     && rm -rf /tmp/downloaded_packages/
 
-# prevent creating .gitconfig directory on the host
-RUN touch /home/rstudio/.gitconfig
-
 # gRPC External Tool
-EXPOSE 50404
+EXPOSE 50420
+
+RUN echo $PWD
